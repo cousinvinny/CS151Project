@@ -24,7 +24,6 @@ public class ResetPWController implements Initializable{
 	private Scene scene;
 	private Parent root;
 	
-	
 	public void switchToSceneReturnLogin(ActionEvent event) throws IOException {
 		root = (BorderPane)FXMLLoader.load(getClass().getResource("returnLog.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -32,7 +31,6 @@ public class ResetPWController implements Initializable{
 		stage.setScene(scene);
 		stage.show();
 	}
-	
 	
 	/**
 	 * RESET PW

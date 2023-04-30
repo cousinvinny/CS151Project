@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.InitialLogController">
+   <center>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="274.0" prefWidth="165.0">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <children>
+                  <Label text="Welcome!">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="New User">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="196.0" prefWidth="165.0">
+               <HBox.margin>
+                  <Insets bottom="110.0" top="110.0" />
+               </HBox.margin>
+               <children>
+                  <PasswordField fx:id="defaultPWPF" promptText="Default Password: p">
+                     <VBox.margin>
+                        <Insets top="62.0" />
+                     </VBox.margin></PasswordField>
+                  <Button fx:id="initialLoginBTN" mnemonicParsing="false" onAction="#firstTimeLogin" text="Login" />
+                  <Label fx:id="loginStatus" prefHeight="65.0" prefWidth="165.0" text="LoginStatus" textAlignment="CENTER" textFill="RED" textOverrun="WORD_ELLIPSIS" />
+               </children>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
+         </BorderPane.margin>
+      </HBox>
+   </center>
+</BorderPane>

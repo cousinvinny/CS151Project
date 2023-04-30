@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SearchForRecommendationController">
+	<!-- TODO Add Nodes -->
+   <center>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="252.0" text="Search for Recommendation">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="23.0" prefWidth="170.0" text="Please enter student's last name" />
+               </children>
+               <HBox.margin>
+                  <Insets left="110.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="170.0">
+               <children>
+                  <TextField fx:id="lastNameTextField" promptText="Last Name">
+                     <VBox.margin>
+                        <Insets top="130.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchButtonAction" text="Search" />
+                  <Label fx:id="searchStatusLabel" prefHeight="17.0" prefWidth="168.0" text="searchStatus" textFill="RED" />
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#switchToSceneRecGUI" prefHeight="25.0" prefWidth="61.0" text="Back">
+                     <VBox.margin>
+                        <Insets top="80.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ListView fx:id="listView" maxHeight="300.0" prefHeight="200.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets top="185.0" />
+                     </VBox.margin>
+                  </ListView>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Edit Recommendation" />
+                        <Button mnemonicParsing="false" text="Delete Recommendation" />
+                     </children>
+                  </VBox>
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="70.0" left="70.0" right="70.0" top="70.0" />
+         </BorderPane.margin>
+      </HBox>
+   </center>
+</BorderPane>

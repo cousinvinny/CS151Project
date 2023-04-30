@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.recGUIController">
+   <center>
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="576.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="550.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="192.0">
+                           <children>
+                              <Label alignment="TOP_LEFT" text="New Recommendation">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="fnTextField" promptText="First Name">
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="tsTextField" promptText="Target School">
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <Label text="1st Semester Taken">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ChoiceBox fx:id="semTakeCB" prefWidth="192.0" />
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="215.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" />
+                                    <VBox prefHeight="200.0" prefWidth="100.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="192.0">
+                           <children>
+                              <TextField fx:id="lnTextField" promptText="Last Name">
+                                 <VBox.margin>
+                                    <Insets top="39.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <Label text="Target Program">
+                                 <VBox.margin>
+                                    <Insets top="3.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ChoiceBox fx:id="tpCB" prefWidth="192.0" />
+                              <TextField fx:id="semYearTextField" promptText="1st Semester Year">
+                                 <VBox.margin>
+                                    <Insets top="32.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="192.0">
+                           <children>
+                              <Label text="Gender">
+                                 <VBox.margin>
+                                    <Insets top="22.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ChoiceBox fx:id="genCB" prefWidth="192.0">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </ChoiceBox>
+                              <DatePicker fx:id="datePick" prefWidth="192.0" promptText="Current Date">
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </DatePicker>
+                              <TextField fx:id="firstCourseTF" promptText="1st Course Taken">
+                                 <VBox.margin>
+                                    <Insets top="16.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="firstGradeTF" promptText="1st Course Grade" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="576.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="144.0">
+                           <children>
+                              <Label text="Other Courses" />
+                              <ListView fx:id="otherCoursesLV" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="144.0">
+                           <children>
+                              <Label text="Grades" />
+                              <TextArea fx:id="otherGradesTA" promptText="Separate Grades with a &quot;,&quot; Type grades in order of courses selected." wrapText="true" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="144.0">
+                           <children>
+                              <Label text="Personal Characteristics">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <ListView fx:id="pcLV" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="144.0">
+                           <children>
+                              <Label text="Academic Characteristics">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <ListView fx:id="acLV" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox prefHeight="30.0" prefWidth="576.0">
+                     <children>
+                        <VBox prefHeight="30.0" prefWidth="144.0">
+                           <children>
+                              <Button alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="Edit">
+                                 <VBox.margin>
+                                    <Insets left="90.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="30.0" prefWidth="145.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefWidth="53.0" text="Edit">
+                                 <VBox.margin>
+                                    <Insets left="90.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="30.0" prefWidth="144.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefWidth="53.0" text="Edit">
+                                 <VBox.margin>
+                                    <Insets left="90.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="30.0" prefWidth="145.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefWidth="53.0" text="Edit">
+                                 <VBox.margin>
+                                    <Insets left="90.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="compileButton" mnemonicParsing="false" onAction="#compileRec" prefWidth="53.0" text="Save">
+                           <HBox.margin>
+                              <Insets right="75.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#printRec" text="Compile">
+                           <HBox.margin>
+                              <Insets right="75.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="exitRecBTN" mnemonicParsing="false" onAction="#switchToSceneMainPage" prefWidth="53.0" text="Exit" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="495.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="576.0">
+                     <children>
+                        <Label text="Recommendation Preview" />
+                        <TextArea fx:id="compiledTA" prefHeight="450.0" prefWidth="200.0" promptText="How to preview: Save Rec -&gt; Compile -&gt; Done" wrapText="true" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </HBox>
+   </center>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</BorderPane>

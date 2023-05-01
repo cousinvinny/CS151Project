@@ -50,6 +50,10 @@ public class SearchForRecommendationController implements Initializable{
 	private Label searchStatusLabel;
 	@FXML
 	private ListView<String> listView;
+	@FXML
+	private Button editRecommendationButton;
+	@FXML
+	private Button deleteRecommendationButton;
 	
 	public void searchButtonAction(ActionEvent event) {
 		 String fileName = lastNameTextField.getText();
@@ -59,6 +63,14 @@ public class SearchForRecommendationController implements Initializable{
 		    } else {
 		        System.out.println("File is not valid or does not exist.");
 		    }
+	}
+	
+	public void editRecommendation(ActionEvent event) throws IOException {
+		switchToSceneEditRecommendation(event);
+	}
+	
+	public void deleteRecommendation(ActionEvent event) {
+		
 	}
 	
 	@Override

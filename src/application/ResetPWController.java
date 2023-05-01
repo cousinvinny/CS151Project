@@ -62,7 +62,7 @@ public class ResetPWController implements Initializable{
 			resetPasswordStatus.setText("Passwords do not match!");
 			e.printStackTrace();
 		}
-		
+			
 		/*
 		if(newPassword.equals(confNewPassword)) {
 			System.out.println("New PW Set");

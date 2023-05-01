@@ -9,7 +9,7 @@ public class Recommendation {
 	private ArrayList<String> grades = new ArrayList<>();
 	private ArrayList<String> personalCharacteristics = new ArrayList<>();
 	private ArrayList<String> academicCharacteristics = new ArrayList<>();
-
+	private static Recommendation recommendation = new Recommendation();
 	/**
 	 * 
 	 * Constructors
@@ -18,6 +18,10 @@ public class Recommendation {
 	Recommendation() {
 	}
 
+	public static Recommendation getRecommendation() {
+		return recommendation;
+	}
+	
 	/**
 	 * 
 	 * Accessors

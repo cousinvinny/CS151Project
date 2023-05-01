@@ -18,6 +18,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.RecommendationModel;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -74,6 +76,8 @@ public class recGUIController implements Initializable {
 	@FXML
 	TextArea otherGradesTA;
 
+	RecommendationModel recommendationModel = new RecommendationModel();
+	
 	public void compileRec(ActionEvent event) { // rename to save data
 		try {
 			firstname = fnTextField.getText();
@@ -135,7 +139,8 @@ public class recGUIController implements Initializable {
 			}
 
 			user.getCompletedRecs().add(rec); // add new completed rec to arraylist
-
+			recommendationModel.insertRecommendationDataToDB(rec);
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		}

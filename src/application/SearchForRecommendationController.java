@@ -55,6 +55,10 @@ public class SearchForRecommendationController implements Initializable{
 	@FXML
 	private Button deleteRecommendationButton;
 	
+	/*
+	 * This method should searches for a text file named with the last name of student,
+	 * but should really look up a row with the correct last name in the database
+	 */
 	public void searchButtonAction(ActionEvent event) {
 		 String fileName = lastNameTextField.getText();
 		    File textFile = new File(fileName + ".txt");
@@ -69,6 +73,9 @@ public class SearchForRecommendationController implements Initializable{
 		switchToSceneEditRecommendation(event);
 	}
 	
+	/*
+	 * This method will delete a recommendation text file, and the entry in the database
+	 */
 	public void deleteRecommendation(ActionEvent event) {
 		
 	}

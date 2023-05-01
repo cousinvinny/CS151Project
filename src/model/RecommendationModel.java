@@ -53,7 +53,7 @@ public class RecommendationModel {
 	}
 	
 	
-	public boolean populateUser() throws SQLException {
+	public boolean editRecommendationDataInDB(Recommendation rec) throws SQLException {
 
 		String name, title, school, department, email, phoneNum;
 		PreparedStatement preparedStatement = null;

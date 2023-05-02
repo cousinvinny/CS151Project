@@ -18,6 +18,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.ReturnLogModel;
+import model.UserDataModel;
 
 public class ReturnLogController implements Initializable{
 	
@@ -34,6 +35,23 @@ public class ReturnLogController implements Initializable{
 	}
 	
 	/**
+	 * POPULATE DROPDOWNS WITH FILE/DATABASE INFO
+	 */
+
+	public void populateDataFromDB() throws SQLException{
+		userDataModel.populateUser();
+		userDataModel.populateSemesters();
+		userDataModel.populateCourses();
+		userDataModel.populatePrograms();
+		userDataModel.populatePersonalCharacteristics();
+		userDataModel.populateAcademicCharacteristics();
+	}
+	
+	/**
+	 * END POPULATE DROPDOWNS WITH FILE/DATABASE INFO
+	 */
+	
+	/**
 	 * LOG BACK IN
 	 */
 	@FXML PasswordField logBackInPF;
@@ -42,6 +60,7 @@ public class ReturnLogController implements Initializable{
 	User user = User.getUser();
 	private String logBackInPW;
 	ReturnLogModel returnLogModel = new ReturnLogModel();
+	UserDataModel userDataModel = new UserDataModel();
 	
 	public void logBackIn(ActionEvent event) throws IOException {
 
@@ -49,6 +68,7 @@ public class ReturnLogController implements Initializable{
 		try {
 			if(returnLogModel.isLogin(logBackInPW)) {
 				System.out.println("Login Success");
+				populateDataFromDB();
 				switchToSceneRecGUI(event);
 			}
 			else {

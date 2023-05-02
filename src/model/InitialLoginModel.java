@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import application.SqliteConnection;
 
 public class InitialLoginModel {
+	private static boolean isInitialLogin;
 	Connection connection;
 
 	public InitialLoginModel() {
@@ -18,7 +19,17 @@ public class InitialLoginModel {
 		}
 	}
 
-	public boolean isLogin(String pass) throws SQLException {
+	public void setInitialLogin(boolean isInitialLogin) {
+		InitialLoginModel.isInitialLogin = isInitialLogin;
+	}
+	
+	public boolean isInitialLogin() {
+		return isInitialLogin;
+	}
+	
+	public boolean isFirstTimeLogin(String pass) throws SQLException {
+
+		isInitialLogin = true;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		String query = "select * from default_password where password = ?";

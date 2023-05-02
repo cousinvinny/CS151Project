@@ -13,11 +13,16 @@
    <center>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" prefHeight="274.0" prefWidth="165.0">
+            <VBox alignment="CENTER" prefHeight="520.0" prefWidth="278.0">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
                <children>
+                  <Label prefHeight="45.0" prefWidth="265.0" text="Rekommnedationer">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
                   <Label text="Welcome!">
                      <font>
                         <Font size="20.0" />

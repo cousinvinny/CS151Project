@@ -36,6 +36,7 @@ public class InitialLogController implements Initializable{
 	 * POPULATE DROPDOWNS WITH FILE/DATABASE INFO
 	 */
 
+	/*
 	public void populateInitialDataFromDB() throws SQLException{
 		userDataModel.populateUser();
 		userDataModel.populateSemesters();
@@ -43,7 +44,7 @@ public class InitialLogController implements Initializable{
 		userDataModel.populatePrograms();
 		userDataModel.populatePersonalCharacteristics();
 		userDataModel.populateAcademicCharacteristics();
-	}
+	}*/
 	
 	/**
 	 * END POPULATE DROPDOWNS WITH FILE/DATABASE INFO
@@ -61,15 +62,16 @@ public class InitialLogController implements Initializable{
 	Label loginStatus;
 	public String firstLoginPW;
 	InitialLoginModel initialLoginModel = new InitialLoginModel();
-	UserDataModel userDataModel = new UserDataModel();
+	//UserDataModel userDataModel = new UserDataModel();
+	
 	
 	public void firstTimeLogin(ActionEvent event) throws IOException {
 		firstLoginPW = defaultPWPF.getText();
 		try {
-			if(initialLoginModel.isLogin(firstLoginPW)) {
+			if(initialLoginModel.isFirstTimeLogin(firstLoginPW)) {
+				initialLoginModel.setInitialLogin(false);
 				System.out.println("Login Success");
-				populateInitialDataFromDB();
-				//populate();
+				//populateInitialDataFromDB();
 				switchToSceneresetPW(event);
 			}
 			else {

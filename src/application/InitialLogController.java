@@ -13,7 +13,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.InitialLoginModel;
-import model.UserDataModel;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -66,10 +65,10 @@ public class InitialLogController implements Initializable{
 	
 	
 	public void firstTimeLogin(ActionEvent event) throws IOException {
+		String flag = "FALSE";
 		firstLoginPW = defaultPWPF.getText();
 		try {
-			if(initialLoginModel.isFirstTimeLogin(firstLoginPW)) {
-				initialLoginModel.setInitialLogin(false);
+			if(initialLoginModel.isFirstTimeLogin(firstLoginPW,flag)) {
 				System.out.println("Login Success");
 				//populateInitialDataFromDB();
 				switchToSceneresetPW(event);

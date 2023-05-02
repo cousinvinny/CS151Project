@@ -11,15 +11,14 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
+		InitialLoginModel model = new InitialLoginModel();
 		try {
 			BorderPane root;
-			InitialLoginModel model = new InitialLoginModel();
-			if(model.isInitialLogin()==false) {
-
-				root = (BorderPane) FXMLLoader.load(getClass().getResource("returnLog.fxml"));
+			if(model.chechDBForInitialLogin()==true) {			
+				root = (BorderPane) FXMLLoader.load(getClass().getResource("initialLog.fxml"));
 			}
 			else
-				root = (BorderPane) FXMLLoader.load(getClass().getResource("initialLog.fxml"));
+				root = (BorderPane) FXMLLoader.load(getClass().getResource("returnLog.fxml"));
 			Scene scene = new Scene(root, 1280, 720);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);

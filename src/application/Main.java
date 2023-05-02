@@ -15,7 +15,7 @@ public class Main extends Application {
 			BorderPane root;
 			InitialLoginModel model = new InitialLoginModel();
 			if(model.isInitialLogin()==false) {
-				System.out.print("hello");
+
 				root = (BorderPane) FXMLLoader.load(getClass().getResource("returnLog.fxml"));
 			}
 			else

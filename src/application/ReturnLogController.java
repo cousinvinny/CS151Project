@@ -63,16 +63,13 @@ public class ReturnLogController implements Initializable{
 	UserDataModel userDataModel = new UserDataModel();
 	
 	public void logBackIn(ActionEvent event) throws IOException {
-
 		logBackInPW = logBackInPF.getText();
 		try {
 			if(returnLogModel.isLogin(logBackInPW)) {
-				System.out.println("Login Success");
 				populateDataFromDB();
 				switchToSceneRecGUI(event);
 			}
 			else {
-				System.out.println("Login Failed");
 				returnLogPasswordStatus.setVisible(true);
 				returnLogPasswordStatus.setText("Incorrect password entered!");
 			}

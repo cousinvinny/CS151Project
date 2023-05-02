@@ -26,6 +26,8 @@ public class ConfirmOldPWModel{
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, pass);
 			resultSet = preparedStatement.executeQuery();
+			String hint = "Hint: Old Password is '" + resultSet.getString("password")+"' (without the quotes)";
+			System.out.println(hint);
 			if(resultSet.next()) {
 				return true;
 			}

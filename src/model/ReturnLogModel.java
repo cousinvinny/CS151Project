@@ -19,24 +19,33 @@ public class ReturnLogModel {
 	}
 	
 	public boolean isLogin(String pass) throws SQLException {
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		String query = "select * from current_password where password = ?";
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, pass);
-			resultSet = preparedStatement.executeQuery();
-			if(resultSet.next()) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		} catch (Exception e) {
-			return false;
-		} finally {
-			preparedStatement.close();
-			resultSet.close();
-		}
+	    PreparedStatement preparedStatement = null;
+	    ResultSet resultSet = null;
+	    String hint;
+	    String query = "SELECT password FROM current_password WHERE password = ?";
+	    try {
+	        preparedStatement = connection.prepareStatement(query);
+	        preparedStatement.setString(1, pass);
+	        resultSet = preparedStatement.executeQuery();
+	        if (resultSet.next()) {
+				System.out.println("Login Success");
+	            return true;
+	        } else {
+	        	preparedStatement.close();
+	        	resultSet.close();
+	        	query = "SELECT password FROM current_password";
+	        	preparedStatement = connection.prepareStatement(query);
+		        resultSet = preparedStatement.executeQuery();
+				System.out.println("Login Failed");
+	            hint = "Hint: Password is '" + resultSet.getString("password") + "' (without the quotes)";
+	            System.out.println(hint);
+	            return false;
+	        }
+	    } catch (Exception e) {
+	        return false;
+	    } finally {
+	        preparedStatement.close();
+	        resultSet.close();
+	    }
 	}
 }

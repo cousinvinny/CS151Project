@@ -47,12 +47,11 @@ public class ConfirmOldPWController implements Initializable {
 		try {
 			oldPassword = oldPWPF.getText();
 			if (confirmOldPWModel.isLogin(oldPassword)) {
-				System.out.println("Login Success");
+				System.out.println("Correct Old Password Entered");
 				switchToSceneResetPW(event);
 			} else {
-				System.out.println("Login Failed");
 				errorMessage.setVisible(true);
-				errorMessage.setText("Incorrect password entered!");
+				errorMessage.setText("Incorrect Old Password Entered!");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

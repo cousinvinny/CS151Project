@@ -419,7 +419,7 @@ public class recGUIController implements Initializable {
 				SearchForRecommendationController.studentRecommendationToEdit = "";
 				fnTextField.setText(recom.getFirstname());
 				lnTextField.setText(recom.getLastname());
-				genCB.setValue(recom.getCurrentDate());
+				genCB.setValue(recom.getGender());
 				tsTextField.setText(recom.getTargetSchool());
 				tpCB.setValue(recom.getTargetProgram());
 				//datePick.setValue();

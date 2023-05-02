@@ -26,7 +26,7 @@ public class MainController {
 	}
 
 	// Search Recommendations
-	public void switchToSceneSearchForRecommendation(ActionEvent event) throws IOException {
+	public void switchToSearch(ActionEvent event) throws IOException {
 		root = (BorderPane) FXMLLoader.load(getClass().getResource("SearchForRecommendation.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);

@@ -3,72 +3,45 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SearchForRecommendationController">
-	<!-- TODO Add Nodes -->
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SearchForRecommendationController">
    <center>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="720.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0">
+            <Label text="Recommendations:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <HBox maxHeight="30.0" maxWidth="420.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label prefHeight="30.0" prefWidth="252.0" text="Search for Recommendation">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label prefHeight="47.0" prefWidth="271.0" text="Please enter student's last name and click search" textAlignment="CENTER" wrapText="true" />
+                  <TextField fx:id="searchTF" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="363.0" promptText="Search by lastname..." />
+                  <Button mnemonicParsing="false" onAction="#searchRec" prefHeight="33.0" prefWidth="57.0" text="Search" />
                </children>
-               <HBox.margin>
-                  <Insets left="110.0" />
-               </HBox.margin>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="170.0">
+            </HBox>
+            <TextArea fx:id="displayRecTA" maxWidth="420.0" prefHeight="200.0" promptText="If a Recommendation is shown, you can edit or delete it." wrapText="true" />
+            <HBox alignment="CENTER" maxWidth="420.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="lastNameTextField" promptText="Last Name">
-                     <VBox.margin>
-                        <Insets top="130.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchButtonAction" text="Search" />
-                  <Label fx:id="searchStatusLabel" prefHeight="17.0" prefWidth="168.0" text="searchStatus" textFill="RED" />
-                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#switchToSceneRecGUI" prefHeight="25.0" prefWidth="61.0" text="Back">
-                     <VBox.margin>
-                        <Insets top="80.0" />
-                     </VBox.margin>
+                  <Button mnemonicParsing="false" onAction="#switchToSceneRecGUI" text="Edit">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
                   </Button>
+                  <Button mnemonicParsing="false" onAction="#deleteRec" text="Delete">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#switchToSceneMainPage" text="Exit" />
                </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <ListView fx:id="listView" maxHeight="300.0" prefHeight="200.0" prefWidth="200.0">
-                     <VBox.margin>
-                        <Insets top="185.0" />
-                     </VBox.margin>
-                  </ListView>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Button fx:id="editRecommendationButton" mnemonicParsing="false" onAction="#editRecommendation" prefHeight="31.0" prefWidth="215.0" text="Edit Recommendation">
-                           <VBox.margin>
-                              <Insets bottom="20.0" />
-                           </VBox.margin></Button>
-                        <Button fx:id="deleteRecommendationButton" mnemonicParsing="false" onAction="#deleteRecommendation" prefHeight="31.0" prefWidth="223.0" text="Delete Recommendation" />
-                     </children>
-                  </VBox>
-               </children>
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin>
-            </VBox>
+            </HBox>
          </children>
-         <BorderPane.margin>
-            <Insets bottom="70.0" left="70.0" right="70.0" top="70.0" />
-         </BorderPane.margin>
-      </HBox>
+      </VBox>
    </center>
 </BorderPane>

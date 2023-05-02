@@ -20,8 +20,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.RecommendationModel;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -80,66 +82,140 @@ public class recGUIController implements Initializable {
 	
 	public void compileRec(ActionEvent event) { // rename to save data
 		try {
-			firstname = fnTextField.getText();
-			rec.setFirstname(firstname);
-
-			lastname = lnTextField.getText();
-			rec.setLastname(lastname);
-
-			gender = genCB.getValue();
-			rec.setGender(gender);
-
-			targetSchool = tsTextField.getText();
-			rec.setTargetSchool(targetSchool);
-
-			targetProgram = tpCB.getValue();
-			rec.setTargetProgram(targetProgram);
-
-			LocalDate date = datePick.getValue();
-			currentDate = date.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
-			rec.setCurrentDate(currentDate);
-
-			firstSemesterTaken = semTakeCB.getValue();
-			rec.setFirstSemesterTaken(firstSemesterTaken);
-
-			firstYearTaken = semYearTextField.getText();
-			rec.setFirstYearTaken(firstYearTaken);
-
-			firstCourse = firstCourseTF.getText();
-			rec.getCoursesTaken().add(firstCourse);
-
-			firstGrade = firstGradeTF.getText();
-			rec.getGrades().add(firstGrade);
-
-			// additional data (multiple selection)
-
-			// OTHER COURSES
-			ObservableList<String> selectedCourses = otherCoursesLV.getSelectionModel().getSelectedItems();
-			for (String otherCourse : selectedCourses) {
-				rec.getCoursesTaken().add(otherCourse);
+			if(user.getEditRecName().isEmpty()) { // if the rec is new
+				firstname = fnTextField.getText();
+				rec.setFirstname(firstname);
+	
+				lastname = lnTextField.getText();
+				rec.setLastname(lastname);
+	
+				gender = genCB.getValue();
+				rec.setGender(gender);
+	
+				targetSchool = tsTextField.getText();
+				rec.setTargetSchool(targetSchool);
+	
+				targetProgram = tpCB.getValue();
+				rec.setTargetProgram(targetProgram);
+	
+				LocalDate date = datePick.getValue();
+				currentDate = date.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
+				rec.setCurrentDate(currentDate);
+	
+				firstSemesterTaken = semTakeCB.getValue();
+				rec.setFirstSemesterTaken(firstSemesterTaken);
+	
+				firstYearTaken = semYearTextField.getText();
+				rec.setFirstYearTaken(firstYearTaken);
+	
+				firstCourse = firstCourseTF.getText();
+				rec.getCoursesTaken().add(firstCourse);
+	
+				firstGrade = firstGradeTF.getText();
+				rec.getGrades().add(firstGrade);
+	
+				// additional data (multiple selection)
+				// if working with existing rec, check if elements in sections below are already in rec object
+				// OR clear arraylist values and redo
+	
+				// OTHER COURSES
+				ObservableList<String> selectedCourses = otherCoursesLV.getSelectionModel().getSelectedItems();
+				for (String otherCourse : selectedCourses) {
+					if(!(rec.getCoursesTaken().contains(otherCourse))) {
+						rec.getCoursesTaken().add(otherCourse);
+					}
+				}
+	
+				// OTHER GRADES
+				otherGrade = otherGradesTA.getText();
+				String[] otherGradeArr = otherGrade.split(",");
+				for (String oGrade : otherGradeArr) {
+					rec.getGrades().add(oGrade);
+				}
+	
+				// personal characteristics
+				ObservableList<String> selectedPC = pcLV.getSelectionModel().getSelectedItems();
+				for (String stuPC : selectedPC) {
+					if(!(rec.getPersonalCharacteristics().contains(stuPC))) {
+						rec.getPersonalCharacteristics().add(stuPC);
+					}
+				}
+	
+				// academic characteristics
+				ObservableList<String> selectedAC = acLV.getSelectionModel().getSelectedItems();
+				for (String stuAC : selectedAC) {
+					if(!(rec.getAcademicCharacteristics().contains(stuAC))) {
+						rec.getAcademicCharacteristics().add(stuAC);
+					}
+				}
+			} else {
+				fnTextField.setText(rec.getFirstname());
+	
+				lnTextField.setText(rec.getLastname());
+	
+				genCB.setValue(rec.getGender());
+	
+				tsTextField.setText(rec.getTargetSchool());
+	
+				tpCB.setValue(rec.getTargetProgram());
+	
+				LocalDate date = datePick.getValue();
+				currentDate = date.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
+				rec.setCurrentDate(currentDate);
+	
+				semTakeCB.setValue(rec.getFirstSemesterTaken());
+	
+				semYearTextField.setText(rec.getFirstSemesterTaken());
+	
+				firstCourseTF.setText(rec.getCoursesTaken().get(0));
+	
+				firstGradeTF.setText(rec.getGrades().get(0));
+	
+				// additional data (multiple selection)
+				// if working with existing rec, check if elements in sections below are already in rec object
+				// OR clear arraylist values and redo
+	
+				// OTHER COURSES
+				ObservableList<String> selectedCourses = otherCoursesLV.getSelectionModel().getSelectedItems();
+				for (String otherCourse : selectedCourses) {
+					if(!(rec.getCoursesTaken().contains(otherCourse))) {
+						rec.getCoursesTaken().add(otherCourse);
+					}
+				}
+	
+				// OTHER GRADES
+				otherGrade = otherGradesTA.getText();
+				String[] otherGradeArr = otherGrade.split(",");
+				for (String oGrade : otherGradeArr) {
+					rec.getGrades().add(oGrade);
+				}
+	
+				// personal characteristics
+				ObservableList<String> selectedPC = pcLV.getSelectionModel().getSelectedItems();
+				for (String stuPC : selectedPC) {
+					if(!(rec.getPersonalCharacteristics().contains(stuPC))) {
+						rec.getPersonalCharacteristics().add(stuPC);
+					}
+				}
+	
+				// academic characteristics
+				ObservableList<String> selectedAC = acLV.getSelectionModel().getSelectedItems();
+				for (String stuAC : selectedAC) {
+					if(!(rec.getAcademicCharacteristics().contains(stuAC))) {
+						rec.getAcademicCharacteristics().add(stuAC);
+					}
+				}
 			}
 
-			// OTHER GRADES
-			otherGrade = otherGradesTA.getText();
-			String[] otherGradeArr = otherGrade.split(",");
-			for (String oGrade : otherGradeArr) {
-				rec.getGrades().add(oGrade);
+			
+			if(user.findStuPos(lastname) == -1) { // if the rec is new
+				System.out.println("New rec. Adding to list.");
+				user.getCompletedRecs().add(rec);
+				
+			} else {
+				System.out.println("Old rec. Just updating values. Not adding to List.");
 			}
 
-			// personal characteristics
-			ObservableList<String> selectedPC = pcLV.getSelectionModel().getSelectedItems();
-			for (String stuPC : selectedPC) {
-				rec.getPersonalCharacteristics().add(stuPC);
-			}
-
-			// academic characteristics
-			ObservableList<String> selectedAC = acLV.getSelectionModel().getSelectedItems();
-			for (String stuAC : selectedAC) {
-				rec.getAcademicCharacteristics().add(stuAC);
-			}
-
-			user.getCompletedRecs().add(rec); // add new completed rec to arraylist
-			recommendationModel.insertRecommendationDataToDB(rec);
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -150,84 +226,214 @@ public class recGUIController implements Initializable {
 	TextArea compiledTA;
 
 	public void printRec(ActionEvent event) throws IOException {
-		String pronoun;
-		if (gender.equals("Male")) {
-			pronoun = "He";
-		} else {
-			pronoun = "She";
-		}
-
-		compiledTA.appendText("For: " + rec.getFirstname() + " " + rec.getLastname() + "\n\n");
-		String fixDate = String.format("%150s", "Date: " + rec.getCurrentDate());
-		compiledTA.appendText(fixDate);
-		compiledTA.appendText("\n\nTo: Graduate Admissions Committee\n\n");
-		compiledTA.appendText("I am writing this letter to recommend my former student " + rec.getFirstname() + " "
-				+ rec.getLastname() + " who is applying for the " + rec.getTargetProgram() + " in your school.");
-		compiledTA.appendText(
-				" I met " + rec.getFirstname() + " in " + rec.getFirstSemesterTaken() + " " + rec.getFirstYearTaken()
-						+ " when he enrolled in my \"" + rec.getCoursesTaken().get(0) + "\" course.\n\n");
-		compiledTA.appendText(firstname + " earned \"" + rec.getGrades().get(0)
-				+ "\" from this tough course, and this shows how knowledgeable and hard worker " + pronoun
-				+ " is.\n\n");
-
-		compiledTA.appendText(pronoun + " also earned ");
-		String ocString = "";
-		for (int ocCount = 0; ocCount < rec.getCoursesTaken().size(); ocCount++) {
-			if (rec.getCoursesTaken().size() > 1 && ocCount == rec.getCoursesTaken().size() - 1) {
-				ocString = ocString + "\"" + rec.getGrades().get(ocCount) + "\" from my \""
-						+ rec.getCoursesTaken().get(ocCount) + " courses.";
-			} else if (rec.getCoursesTaken().size() == 1) {
-				ocString = "\"" + rec.getGrades().get(ocCount) + "\" from my \"" + rec.getCoursesTaken().get(ocCount)
-						+ "\"" + " course.";
+		
+		try {
+			StringBuilder stringBuilder = new StringBuilder();
+			String pronoun;
+			if (rec.getGender().equals("Male")) {
+				pronoun = "He";
 			} else {
-				ocString = ocString + "\"" + rec.getGrades().get(ocCount) + "\" from my \""
-						+ rec.getCoursesTaken().get(ocCount) + "\", ";
+				pronoun = "She";
 			}
-		}
-		compiledTA.appendText(ocString);
-
-		compiledTA.appendText("\n\n" + rec.getFirstname() + " ");
-		String acString = "";
-		for (int acCount = 0; acCount < rec.getAcademicCharacteristics().size(); acCount++) {
-			if (rec.getAcademicCharacteristics().size() > 1 && acCount == rec.getAcademicCharacteristics().size() - 1) {
-				acString = acString + "and " + rec.getAcademicCharacteristics().get(acCount) + ".\n\n";
-			} else if (rec.getAcademicCharacteristics().size() == 1) {
-				acString = "" + rec.getAcademicCharacteristics().get(acCount) + ".\n\n";
-			} else {
-				acString = acString + rec.getAcademicCharacteristics().get(acCount) + ", ";
+	
+			compiledTA.appendText("For: " + rec.getFirstname() + " " + rec.getLastname() + "\n\n");
+			String fixDate = String.format("%150s", "Date: " + rec.getCurrentDate());
+			compiledTA.appendText(fixDate);
+			compiledTA.appendText("\n\nTo: Graduate Admissions Committee\n\n");
+			compiledTA.appendText("I am writing this letter to recommend my former student " + rec.getFirstname() + " "
+					+ rec.getLastname() + " who is applying for the " + rec.getTargetProgram() + " in your school.");
+			compiledTA.appendText(
+					" I met " + rec.getFirstname() + " in " + rec.getFirstSemesterTaken() + " " + rec.getFirstYearTaken()
+							+ " when he enrolled in my \"" + rec.getCoursesTaken().get(0) + "\" course.\n\n");
+			compiledTA.appendText(rec.getFirstname() + " earned \"" + rec.getGrades().get(0)
+					+ "\" from this tough course, and this shows how knowledgeable and hard worker " + pronoun
+					+ " is.");
+	
+			if (rec.getCoursesTaken().size() > 1) {
+				compiledTA.appendText("\n\n" + pronoun + " also earned ");
+				String ocString = "";
+				for (int ocCount = 1; ocCount < rec.getCoursesTaken().size(); ocCount++) {
+					if (rec.getCoursesTaken().size() > 1 && ocCount == rec.getCoursesTaken().size() - 1) {
+						ocString = ocString + "\"" + rec.getGrades().get(ocCount) + "\" from my \""
+								+ rec.getCoursesTaken().get(ocCount) + " courses.";
+					} else if (rec.getCoursesTaken().size() == 1) {
+						ocString = "\"" + rec.getGrades().get(ocCount) + "\" from my \"" + rec.getCoursesTaken().get(ocCount)
+								+ "\"" + " course.";
+					} else {
+						ocString = ocString + "\"" + rec.getGrades().get(ocCount) + "\" from my \""
+								+ rec.getCoursesTaken().get(ocCount) + "\", ";
+					}
+				}
+				compiledTA.appendText(ocString);
 			}
-		}
-		compiledTA.appendText(acString);
-
-		compiledTA.appendText(pronoun + " was always ");
-		String pcString = "";
-		for (int pcCount = 0; pcCount < rec.getPersonalCharacteristics().size(); pcCount++) {
-			if (rec.getPersonalCharacteristics().size() > 1 && pcCount == rec.getPersonalCharacteristics().size() - 1) {
-				pcString = pcString + "and " + rec.getPersonalCharacteristics().get(pcCount) + ".\n\n";
-			} else if (rec.getPersonalCharacteristics().size() == 1) {
-				pcString = "" + rec.getPersonalCharacteristics().get(pcCount) + ".\n\n";
-			} else {
-				pcString = pcString + rec.getPersonalCharacteristics().get(pcCount) + ", ";
+	
+			if (rec.getAcademicCharacteristics().size() > 0) {
+				compiledTA.appendText("\n\n" + rec.getFirstname() + " ");
+				String acString = "";
+				for (int acCount = 0; acCount < rec.getAcademicCharacteristics().size(); acCount++) {
+					if (rec.getAcademicCharacteristics().size() > 1 && acCount == rec.getAcademicCharacteristics().size() - 1) {
+						acString = acString + "and " + rec.getAcademicCharacteristics().get(acCount) + ".";
+					} else if (rec.getAcademicCharacteristics().size() == 1) {
+						acString = "" + rec.getAcademicCharacteristics().get(acCount) + ".";
+					} else {
+						acString = acString + rec.getAcademicCharacteristics().get(acCount) + ", ";
+					}
+				}
+				compiledTA.appendText(acString);
 			}
+	
+			if (rec.getPersonalCharacteristics().size() > 0) {
+				compiledTA.appendText("\n\n" + pronoun + " was always ");
+				String pcString = "";
+				for (int pcCount = 0; pcCount < rec.getPersonalCharacteristics().size(); pcCount++) {
+					if (rec.getPersonalCharacteristics().size() > 1 && pcCount == rec.getPersonalCharacteristics().size() - 1) {
+						pcString = pcString + "and " + rec.getPersonalCharacteristics().get(pcCount) + ".";
+					} else if (rec.getPersonalCharacteristics().size() == 1) {
+						pcString = "" + rec.getPersonalCharacteristics().get(pcCount) + ".";
+					} else {
+						pcString = pcString + rec.getPersonalCharacteristics().get(pcCount) + ", ";
+					}
+				}
+				compiledTA.appendText(pcString);
+			}
+	
+			compiledTA.appendText("\n\nFurthermore, I noticced from the term project, " + pronoun
+					+ ", developed leadership, time managment, and problem-solving skills." + " " + pronoun
+					+ " worked effectively with the team members and delegated tasks approriately. "
+					+ "They were able to deliver a successful project in a timely fashion.\n\n");
+			compiledTA.appendText("I believe that " + rec.getFirstname() + " " + rec.getLastname()
+					+ " has the capacity to excel at higher education program and this is my pleasure to highly recommend him.\n\n");
+			compiledTA.appendText(
+					"Please do not hesitate to contact me with further questions.\n\n\n\nVery Respectfully,\n\n");
+	
+			compiledTA.appendText(user.getFullname() + "\n");
+			compiledTA.appendText(user.getTitle() + "\n");
+			compiledTA.appendText(user.getSchoolName() + ", " + user.getDepartment() + "\n");
+			compiledTA.appendText(user.getEmail() + "\n");
+			compiledTA.appendText(user.getPhoneNumber());
+	
+			////////////////////////////////////////
+			stringBuilder.append("For: " + rec.getFirstname() + " " + rec.getLastname() + "\n\n");
+			stringBuilder.append(fixDate);
+			stringBuilder.append("\n\nTo: Graduate Admissions Committee\n\n");
+			stringBuilder.append("I am writing this letter to recommend my former student " + rec.getFirstname() + " "
+					+ rec.getLastname() + " who is applying for the " + rec.getTargetProgram() + " in your school.");
+			stringBuilder.append(
+					" I met " + rec.getFirstname() + " in " + rec.getFirstSemesterTaken() + " " + rec.getFirstYearTaken()
+							+ " when he enrolled in my \"" + rec.getCoursesTaken().get(0) + "\" course.\n\n");
+			stringBuilder.append(rec.getFirstname() + " earned \"" + rec.getGrades().get(0)
+					+ "\" from this tough course, and this shows how knowledgeable and hard worker " + pronoun
+					+ " is.");
+	
+			if (rec.getCoursesTaken().size() > 1) {
+				stringBuilder.append("\n\n" + pronoun + " also earned ");
+				String ocString = "";
+				for (int ocCount = 1; ocCount < rec.getCoursesTaken().size(); ocCount++) {
+					if (rec.getCoursesTaken().size() > 1 && ocCount == rec.getCoursesTaken().size() - 1) {
+						ocString = ocString + "\"" + rec.getGrades().get(ocCount) + "\" from my \""
+								+ rec.getCoursesTaken().get(ocCount) + " courses.";
+					} else if (rec.getCoursesTaken().size() == 1) {
+						ocString = "\"" + rec.getGrades().get(ocCount) + "\" from my \"" + rec.getCoursesTaken().get(ocCount)
+								+ "\"" + " course.";
+					} else {
+						ocString = ocString + "\"" + rec.getGrades().get(ocCount) + "\" from my \""
+								+ rec.getCoursesTaken().get(ocCount) + "\", ";
+					}
+				}
+				stringBuilder.append(ocString);
+			}
+	
+			if (rec.getAcademicCharacteristics().size() > 0) {
+				stringBuilder.append("\n\n" + rec.getFirstname() + " ");
+				String acString = "";
+				for (int acCount = 0; acCount < rec.getAcademicCharacteristics().size(); acCount++) {
+					if (rec.getAcademicCharacteristics().size() > 1 && acCount == rec.getAcademicCharacteristics().size() - 1) {
+						acString = acString + "and " + rec.getAcademicCharacteristics().get(acCount) + ".";
+					} else if (rec.getAcademicCharacteristics().size() == 1) {
+						acString = "" + rec.getAcademicCharacteristics().get(acCount) + ".";
+					} else {
+						acString = acString + rec.getAcademicCharacteristics().get(acCount) + ", ";
+					}
+				}
+				stringBuilder.append(acString);
+			}
+	
+			if (rec.getPersonalCharacteristics().size() > 0) {
+				stringBuilder.append("\n\n" + pronoun + " was always ");
+				String pcString = "";
+				for (int pcCount = 0; pcCount < rec.getPersonalCharacteristics().size(); pcCount++) {
+					if (rec.getPersonalCharacteristics().size() > 1 && pcCount == rec.getPersonalCharacteristics().size() - 1) {
+						pcString = pcString + "and " + rec.getPersonalCharacteristics().get(pcCount) + ".";
+					} else if (rec.getPersonalCharacteristics().size() == 1) {
+						pcString = "" + rec.getPersonalCharacteristics().get(pcCount) + ".";
+					} else {
+						pcString = pcString + rec.getPersonalCharacteristics().get(pcCount) + ", ";
+					}
+				}
+				stringBuilder.append(pcString);
+			}
+	
+			stringBuilder.append("\n\nFurthermore, I noticced from the term project, " + pronoun
+					+ ", developed leadership, time managment, and problem-solving skills." + " " + pronoun
+					+ " worked effectively with the team members and delegated tasks approriately. "
+					+ "They were able to deliver a successful project in a timely fashion.\n\n");
+			stringBuilder.append("I believe that " + rec.getFirstname() + " " + rec.getLastname()
+					+ " has the capacity to excel at higher education program and this is my pleasure to highly recommend him.\n\n");
+			stringBuilder.append(
+					"Please do not hesitate to contact me with further questions.\n\n\n\nVery Respectfully,\n\n");
+	
+			stringBuilder.append(user.getFullname() + "\n");
+			stringBuilder.append(user.getTitle() + "\n");
+			stringBuilder.append(user.getSchoolName() + ", " + user.getDepartment() + "\n");
+			stringBuilder.append(user.getEmail() + "\n");
+			stringBuilder.append(user.getPhoneNumber());
+			
+			try {
+				FileWriter writer = new FileWriter(rec.getFirstname() + "_" + rec.getLastname() + "_Recommendation.txt");
+				writer.write(stringBuilder.toString());
+				writer.close();
+			} catch (IOException e) {
+			    System.out.println(e);
+			}
+			
+			recommendationModel.insertRecommendationDataToDB(rec,stringBuilder);
+			System.out.println("finished writing to text area.");
+		} catch (Exception e) {
+			System.out.println(e);
 		}
-		compiledTA.appendText(pcString);
+	}
+	
+	@FXML
+	Label newOrOldBtn;
 
-		compiledTA.appendText("Furthermore, I noticced from the term project, " + pronoun
-				+ ", developed leadership, time managment, and problem-solving skills." + " " + pronoun
-				+ " worked effectively with the team members and delegated tasks approriately. "
-				+ "They were able to deliver a successful project in a timely fashion.\n\n");
-		compiledTA.appendText("I believe that " + rec.getFirstname() + " " + rec.getLastname()
-				+ " has the capacity to excel at higher education program and this is my pleasure to highly recommend him.\n\n");
-		compiledTA.appendText(
-				"Please do not hesitate to contact me with further questions.\n\n\n\nVery Respectfully,\n\n");
-
-		compiledTA.appendText(user.getFullname() + "\n");
-		compiledTA.appendText(user.getTitle() + "\n");
-		compiledTA.appendText(user.getSchoolName() + ", " + user.getDepartment() + "\n");
-		compiledTA.appendText(user.getEmail() + "\n");
-		compiledTA.appendText(user.getPhoneNumber());
-
-		System.out.println("finished writing to text area.");
+	
+	public void loadRec() {
+		if(!(SearchForRecommendationController.getStuRecLastNameToEdit().isEmpty())) { // if the rec is an existing rec
+			int stuPosition = user.findStuPos(user.getEditRecName());
+			newOrOldBtn.setText("Editing Existing Recommendaiton");
+			//rec = user.getCompletedRecs().get(stuPosition);
+			Recommendation recom;
+			try {
+				recom = recommendationModel.loadRecommendationDataFromDB(SearchForRecommendationController.getStuRecLastNameToEdit());
+				System.out.println(SearchForRecommendationController.getStuRecLastNameToEdit());
+				SearchForRecommendationController.studentRecommendationToEdit = "";
+				fnTextField.setText(recom.getFirstname());
+				lnTextField.setText(recom.getLastname());
+				genCB.setValue(recom.getCurrentDate());
+				tsTextField.setText(recom.getTargetSchool());
+				tpCB.setValue(recom.getTargetProgram());
+				//datePick.setValue();
+				semTakeCB.setValue(recom.getFirstSemesterTaken());
+				semYearTextField.setText(recom.getFirstYearTaken());
+				compiledTA.setText(recom.getRecommendationLetterText());
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		} else { // if the rec is new
+			rec = new Recommendation();
+			newOrOldBtn.setText("New Recommendation");
+		}
 	}
 
 	/**
@@ -237,6 +443,8 @@ public class recGUIController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		loadRec();
+		
 		genCB.getItems().addAll(genders);
 		tpCB.getItems().addAll(programs);
 		semTakeCB.getItems().addAll(semestersTaught);

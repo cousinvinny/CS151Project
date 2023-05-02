@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Recommendation {
 	private String firstname, lastname, gender, targetSchool, targetProgram, currentDate, firstSemesterTaken,
-			firstYearTaken;
+			firstYearTaken, recommendationLetterText;
 	private ArrayList<String> coursesTaken = new ArrayList<>();
 	private ArrayList<String> grades = new ArrayList<>();
 	private ArrayList<String> personalCharacteristics = new ArrayList<>();
@@ -15,7 +15,7 @@ public class Recommendation {
 	 * Constructors
 	 * 
 	 */
-	Recommendation() {
+	public Recommendation() {
 	}
 
 	public static Recommendation getRecommendation() {
@@ -126,6 +126,14 @@ public class Recommendation {
 
 	public void setAcademicCharacteristics(ArrayList<String> academicCharacteristics) {
 		this.academicCharacteristics = academicCharacteristics;
+	}
+
+	public String getRecommendationLetterText() {
+		return recommendationLetterText;
+	}
+
+	public void setRecommendationLetterText(String recommendationLetterText) {
+		this.recommendationLetterText = recommendationLetterText;
 	}
 
 }

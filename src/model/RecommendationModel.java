@@ -12,7 +12,7 @@ import application.User;
 public class RecommendationModel {
 	Connection connection;
 	User user = User.getUser();
-	
+
 	public RecommendationModel() {
 		connection = SqliteConnection.Connector();
 		if (connection == null) {
@@ -20,70 +20,73 @@ public class RecommendationModel {
 			System.exit(1);
 		}
 	}
-	
-	
-	
-	public boolean insertRecommendationDataToDB(Recommendation recommendation) {
+
+	public boolean insertRecommendationDataToDB(Recommendation recommendation, StringBuilder sb) {
 		String insert = "INSERT INTO recommendation_data (firstname, lastname, gender, target_school,"
 				+ " target_program, current_date, first_semester, first_year, courses_taken, course_grades,"
-				+ " personal_characteristics, academic_characteristics) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		
-		
+				+ " personal_characteristics, academic_characteristics, recommendation_letter_text) "
+				+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try (PreparedStatement pstmt = connection.prepareStatement(insert)) {
-	        pstmt.setString(1, recommendation.getFirstname());
-	        pstmt.setString(2, recommendation.getLastname());
-	        pstmt.setString(3, recommendation.getGender());
-	        pstmt.setString(4, recommendation.getTargetSchool());
-	        pstmt.setString(5, recommendation.getTargetProgram());
-	        pstmt.setString(6, recommendation.getCurrentDate());
-	        pstmt.setString(7, recommendation.getFirstSemesterTaken());
-	        pstmt.setString(8, recommendation.getFirstYearTaken());
-	        pstmt.setString(9, String.join(",",recommendation.getCoursesTaken()));
-	        pstmt.setString(10, String.join(",",recommendation.getGrades()));
-	        pstmt.setString(11, String.join(",",recommendation.getPersonalCharacteristics()));
-	        pstmt.setString(12, String.join(",",recommendation.getAcademicCharacteristics()));
-
-
-	        pstmt.executeUpdate();
-	        return true;
-	    } catch (SQLException e) {
-	        System.out.println(e.getMessage());
-	        return false;
-	    }
-	}
-	
-	
-	public boolean editRecommendationDataInDB(Recommendation rec) throws SQLException {
-
-		String name, title, school, department, email, phoneNum;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		String query = "select full_name, title, school_name, department_name, email_address, phone_number from faculty_signature";
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			resultSet = preparedStatement.executeQuery();
-			if (resultSet.next()) {
-				name = resultSet.getString("full_name");
-				title = resultSet.getString("title");
-				school = resultSet.getString("school_name");
-				department = resultSet.getString("department_name");
-				email = resultSet.getString("email_address");
-				phoneNum = resultSet.getString("phone_number");
-				user.setFullname(name);
-				user.setTitle(title);
-				user.setSchoolName(school);
-				user.setDepartment(department);
-				user.setEmail(email);
-				user.setPhoneNumber(phoneNum);
-				return true;
-			}
-			else
-				return false;
-		} catch (Exception e) {
+			pstmt.setString(1, recommendation.getFirstname());
+			pstmt.setString(2, recommendation.getLastname());
+			pstmt.setString(3, recommendation.getGender());
+			pstmt.setString(4, recommendation.getTargetSchool());
+			pstmt.setString(5, recommendation.getTargetProgram());
+			pstmt.setString(6, recommendation.getCurrentDate());
+			pstmt.setString(7, recommendation.getFirstSemesterTaken());
+			pstmt.setString(8, recommendation.getFirstYearTaken());
+			pstmt.setString(9, String.join(",", recommendation.getCoursesTaken()));
+			pstmt.setString(10, String.join(",", recommendation.getGrades()));
+			pstmt.setString(11, String.join(",", recommendation.getPersonalCharacteristics()));
+			pstmt.setString(12, String.join(",", recommendation.getAcademicCharacteristics()));
+			pstmt.setString(13, sb.toString());
+			pstmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
 			return false;
-		} finally {
-			preparedStatement.close();
-			resultSet.close();
 		}
+	}
+
+	public Recommendation loadRecommendationDataFromDB(String lastNameInput) throws SQLException {
+	    Recommendation recommendation = new Recommendation();
+	    String firstname, lastname, gender, targetSchool, targetProgram, currentDate, firstSemester, firstYear, recommendationLetterText;
+	    //coursesTaken,courseGrades, personal_characteristics, academicCharacteristics, ;
+	    PreparedStatement preparedStatement = null;
+	    ResultSet resultSet = null;
+	    String query = "SELECT firstname, lastname, gender, target_school, target_program, current_date, first_semester,"
+	            + " first_year, courses_taken, course_grades, personal_characteristics, academic_characteristics,"
+	            + " recommendation_letter_text FROM recommendation_data WHERE lastname = ?";
+	    try {
+	        preparedStatement = connection.prepareStatement(query);
+	        preparedStatement.setString(1, lastNameInput);
+	        resultSet = preparedStatement.executeQuery();
+	        if (resultSet.next()) {
+	            firstname = resultSet.getString("firstname");
+	            lastname = resultSet.getString("lastname");
+	            gender = resultSet.getString("gender");
+	            targetSchool = resultSet.getString("target_school");
+	            targetProgram = resultSet.getString("target_program");
+	            currentDate = resultSet.getString("current_date");
+	            firstSemester = resultSet.getString("first_semester");
+	            firstYear = resultSet.getString("first_year");
+	            recommendationLetterText = resultSet.getString("recommendation_letter_text");
+	            recommendation.setFirstname(firstname);
+	            recommendation.setLastname(lastname);
+	            recommendation.setGender(gender);
+	            recommendation.setTargetSchool(targetSchool);
+	            recommendation.setTargetProgram(targetProgram);
+	            recommendation.setFirstSemesterTaken(firstSemester);
+	            recommendation.setFirstYearTaken(firstYear);
+	            recommendation.setRecommendationLetterText(recommendationLetterText);
+	            return recommendation;
+	        }
+	        return recommendation;
+	    } catch (Exception e) {
+	        return recommendation;
+	    } finally {
+	        preparedStatement.close();
+	        resultSet.close();
+	    }
 	}
 }

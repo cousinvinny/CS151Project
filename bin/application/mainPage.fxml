@@ -30,7 +30,7 @@
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#switchToSceneSearchForRecommendation" text="Search Recommendations">
+                  <Button mnemonicParsing="false" onAction="#switchToSearch" text="Search Recommendations">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>
@@ -38,7 +38,7 @@
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#switchToSceneUserData" text="Edit User Data">
+                  <Button mnemonicParsing="false" onAction="#switchToSceneUserData" text="User Data">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>

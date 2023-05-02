@@ -25,6 +25,28 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	private String editRec = "";
+	
+	public String getEditRecName() {
+		return editRec;
+	}
+	
+	public void setEditRecName(String editRec) {
+		this.editRec = editRec;
+	}
+	
+	public int findStuPos(String studentLastname) {
+		int studentPos = -1;
+		if(completedRecs.size() > 0) {
+			for(int i = 0; i < completedRecs.size(); i++) {
+				if(studentLastname.equals(completedRecs.get(i).getLastname())) {
+					studentPos = i;
+				}
+			}
+		}
+		return studentPos;
+	}
 
 	/**
 	 * END Setting up user

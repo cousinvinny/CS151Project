@@ -1,6 +1,5 @@
 package application;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,77 +11,83 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class SearchForRecommendationController implements Initializable{
+public class SearchForRecommendationController {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	
+
+	public void switchToSceneMainPage(ActionEvent event) throws IOException {
+		root = (BorderPane) FXMLLoader.load(getClass().getResource("mainPage.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+
 	public void switchToSceneRecGUI(ActionEvent event) throws IOException {
-		root = (BorderPane)FXMLLoader.load(getClass().getResource("mainPage.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		root = (BorderPane) FXMLLoader.load(getClass().getResource("recGUI.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
 	}
+
+	User user = User.getUser();
+	private String recName;
+
+	@FXML
+	TextField searchTF;
+	@FXML
+	TextArea displayRecTA;
 	
-	public void switchToSceneEditRecommendation(ActionEvent event) throws IOException {
-		root = (BorderPane)FXMLLoader.load(getClass().getResource("EditRecommendation.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+	static String studentRecommendationToEdit;
+	
+	public void searchRec(ActionEvent event) throws IOException {
+		try {
+			displayRecTA.clear();
+			recName = searchTF.getText();
+			setStudentRecommendationToEdit(searchTF.getText());
+			int stuPos = user.findStuPos(recName);
+			if(stuPos > -1) {
+				displayRecTA.appendText("Currently working on: " + user.getCompletedRecs().get(stuPos).getFirstname() + "_"
+						+ user.getCompletedRecs().get(stuPos).getLastname() + "_Recommendation\n");
+				user.setEditRecName(recName); // store for editing
+			} else {
+				displayRecTA.appendText("That recommendation does not exist.");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	// get name, search for position in arraylist, delete from arraylist
+	public void deleteRec(ActionEvent event) throws IOException {
+		try {
+			recName = searchTF.getText();
+			int stuPos = user.findStuPos(recName);
+			//System.out.println("Student Found? " + stuPos);
+			user.getCompletedRecs().remove(stuPos);
+			displayRecTA.clear();
+			displayRecTA.setText("Recommendation was successfully removed.");
+			//System.out.println("Num of recs in list is/are: " + user.getCompletedRecs().size());
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	public static String getStuRecLastNameToEdit() {
+		return studentRecommendationToEdit;
+	}
+
+	public void setStudentRecommendationToEdit(String studentRecommendationToEdit) {
+		this.studentRecommendationToEdit = studentRecommendationToEdit;
 	}
 	
-	@FXML 
-	private Button backButton;
-	@FXML
-	private Button searchButton;
-	@FXML
-	private TextField lastNameTextField;
-	@FXML
-	private Label searchStatusLabel;
-	@FXML
-	private ListView<String> listView;
-	@FXML
-	private Button editRecommendationButton;
-	@FXML
-	private Button deleteRecommendationButton;
-	
-	/*
-	 * This method should searches for a text file named with the last name of student,
-	 * but should really look up a row with the correct last name in the database
-	 */
-	public void searchButtonAction(ActionEvent event) {
-		 String fileName = lastNameTextField.getText();
-		    File textFile = new File(fileName + ".txt");
-		    if(textFile.exists() && textFile.isFile()) {
-		        listView.getItems().add(textFile.getName());
-		    } else {
-		        System.out.println("File is not valid or does not exist.");
-		    }
-	}
-	
-	public void editRecommendation(ActionEvent event) throws IOException {
-		switchToSceneEditRecommendation(event);
-	}
-	
-	/*
-	 * This method will delete a recommendation text file, and the entry in the database
-	 */
-	public void deleteRecommendation(ActionEvent event) {
-		
-	}
-	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		searchStatusLabel.setVisible(false);
-	}
 }

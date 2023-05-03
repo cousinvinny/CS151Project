@@ -422,7 +422,7 @@ public class recGUIController implements Initializable {
 			newOrOldLabel.setText("Editing Existing Recommendaiton");
 			try {
 				compileButton.setVisible(false);
-				compileButton.setVisible(false);
+				compileButton2.setVisible(false);
 				recom = recommendationModel.loadRecommendationDataFromDB(SearchForRecommendationController.getStuRecLastNameToEdit());
 				SearchForRecommendationController.studentRecommendationToEdit = "";
 				fnTextField.setText(recom.getFirstname());

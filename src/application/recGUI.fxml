@@ -174,9 +174,9 @@
                                     <Insets left="200.0" top="10.0" />
                                  </VBox.margin>
                               </Button>
-                              <Label fx:id="saveMessage" prefHeight="52.0" prefWidth="241.0" text="Recommendation has been saved to text file" textAlignment="CENTER" textFill="#346aff" wrapText="true">
+                              <Label fx:id="saveMessage" prefHeight="52.0" prefWidth="292.0" text="Recommendation has been saved to text file" textAlignment="CENTER" textFill="#06d30d" wrapText="true">
                                  <VBox.margin>
-                                    <Insets left="130.0" top="10.0" />
+                                    <Insets left="100.0" top="10.0" />
                                  </VBox.margin>
                               </Label>
                            </children>

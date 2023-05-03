@@ -73,7 +73,7 @@ public class SearchForRecommendationController {
 	        if (fileToDelete.delete()) {
 	            displayRecTA.clear();
 	            displayRecTA.setText("Recommendation data in database and textfile " + recFileName + " were successfully removed.");
-	            System.out.println("Recommendation data in database and textfile " + recFileName + " were successfully removed.");
+	            System.out.println("Success: Recommendation data in database and textfile " + recFileName + " were successfully removed.");
 	        } else {
 	            displayRecTA.clear();
 	            displayRecTA.setText("Error: Could not delete file " + recFileName);

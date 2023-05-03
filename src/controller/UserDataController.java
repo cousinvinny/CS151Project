@@ -1,4 +1,4 @@
-package application;
+package controller;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.util.ArrayList;
+
+import application.User;
 
 public class UserDataController {
 	private Stage stage;

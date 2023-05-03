@@ -1,4 +1,4 @@
-package application;
+package controller;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,6 +29,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import application.Recommendation;
+import application.User;
 
 public class recGUIController implements Initializable {
 	/**

@@ -22,7 +22,7 @@ public class ConfirmOldPWModel{
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		String hint;
-		String query = "select * from current_password where password = ?";
+		String query = "SELECT * FROM current_password WHERE password = ?";
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, pass);
@@ -31,7 +31,7 @@ public class ConfirmOldPWModel{
 				return true;
 			}
 			else {
-				hint = "Hint: Old Password is '" + resultSet.getString("password")+"' (without the quotes)";;
+				hint = "Hint: Old Password was '" + resultSet.getString("password")+"' (without the quotes)";;
 				System.out.println(hint);
 				return false;
 			}

@@ -36,7 +36,7 @@ public class ReturnLogModel {
 	        	preparedStatement = connection.prepareStatement(query);
 		        resultSet = preparedStatement.executeQuery();
 				System.out.println("Login Failed");
-	            hint = "Hint: Password is '" + resultSet.getString("password") + "' (without the quotes)";
+	            hint = "Hint: Current Password is '" + resultSet.getString("password") + "' (without the quotes)";
 	            System.out.println(hint);
 	            return false;
 	        }

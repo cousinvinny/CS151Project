@@ -47,7 +47,7 @@ public class InitialLogController implements Initializable{
 		firstLoginPW = defaultPWPF.getText();
 		try {
 			if(initialLoginModel.isFirstTimeLogin(firstLoginPW,flag)) {
-				System.out.println("Login Success");
+				System.out.println("Initial Login Success");
 				switchToSceneresetPW(event);
 			}
 			else {

@@ -20,7 +20,7 @@
                         <Font size="30.0" />
                      </font>
                   </Label>
-                  <Label text="Welcome back!">
+                  <Label prefHeight="30.0" prefWidth="142.0" text="Welcome back!" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -31,11 +31,11 @@
                <children>
                   <PasswordField fx:id="logBackInPF" promptText="Enter Password">
                      <VBox.margin>
-                        <Insets top="50.0" />
+                        <Insets top="95.0" />
                      </VBox.margin></PasswordField>
-                  <Button fx:id="logBackInBTN" mnemonicParsing="false" onAction="#logBackIn" prefHeight="25.0" prefWidth="99.0" text="Login" />
-                  <Button mnemonicParsing="false" onAction="#switchToSceneResetPW" prefHeight="25.0" prefWidth="99.0" text="Reset Password" />
-                  <Label fx:id="returnLogPasswordStatus" prefHeight="17.0" prefWidth="161.0" text="passwordStatus" textFill="RED" />
+                  <Button fx:id="logBackInBTN" mnemonicParsing="false" onAction="#logBackIn" prefHeight="31.0" prefWidth="139.0" text="Login" />
+                  <Button mnemonicParsing="false" onAction="#switchToSceneResetPW" prefHeight="31.0" prefWidth="137.0" text="Reset Password" />
+                  <Label fx:id="returnLogPasswordStatus" prefHeight="61.0" prefWidth="161.0" text="passwordStatus" textAlignment="CENTER" textFill="RED" wrapText="true" />
                </children>
             </VBox>
          </children>

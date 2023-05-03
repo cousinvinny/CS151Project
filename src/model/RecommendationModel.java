@@ -56,7 +56,7 @@ public class RecommendationModel {
 		    preparedStatement.setString(1, lastNameInput);
 		    resultSet = preparedStatement.executeQuery();
 		    if (resultSet.next()) {
-		    	System.out.println("Sucess: Recommendation with last name '" + lastNameInput + "' found in database!");
+		    	System.out.println("Success: Recommendation with last name '" + lastNameInput + "' found in database!");
 		        return true;
 		    }
 		    else {
@@ -64,7 +64,7 @@ public class RecommendationModel {
 		        return false;
 		    }
 		} catch (Exception e) {
-			System.out.println("Exception! No recommendation with that last name exists!");
+			System.out.println("Error: No recommendation with that last name exists!" + e);
 		    return false;
 		} finally {
 		    preparedStatement.close();
@@ -108,6 +108,7 @@ public class RecommendationModel {
 	        }
 	        return recommendation;
 	    } catch (Exception e) {
+	    	System.out.println("Error: could not load recommendation data from database!" + e.getMessage());
 	        return recommendation;
 	    } finally {
 	        preparedStatement.close();
@@ -124,7 +125,7 @@ public class RecommendationModel {
 	        preparedStatement.executeUpdate();
 	        preparedStatement.close();
 	    } catch (SQLException e) {
-	        System.out.println("Error: Could not delete recommendation from database!");
+	        System.out.println("Error: Could not delete recommendation from database!" + e.getMessage());
 	    }
 	}
 }

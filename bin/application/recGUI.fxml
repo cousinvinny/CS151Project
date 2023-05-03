@@ -23,7 +23,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="192.0">
                            <children>
-                              <Label fx:id="newOrOldBtn" alignment="TOP_LEFT" contentDisplay="TOP" maxHeight="75.0" maxWidth="192.0" text="Rec" textAlignment="CENTER" wrapText="true">
+                              <Label fx:id="newOrOldLabel" alignment="TOP_LEFT" contentDisplay="TOP" maxHeight="75.0" maxWidth="192.0" prefHeight="21.0" prefWidth="191.0" text="Rec" textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -148,7 +148,7 @@
                               <Insets right="75.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#printRec" text="Compile">
+                        <Button fx:id="compileButton2" mnemonicParsing="false" onAction="#printRec" text="Compile">
                            <HBox.margin>
                               <Insets right="75.0" />
                            </HBox.margin>
@@ -164,17 +164,17 @@
                      <children>
                         <Label text="Recommendation Preview">
                            <padding>
-                              <Insets top="23.0" />
+                              <Insets top="45.0" />
                            </padding></Label>
                         <TextArea fx:id="compiledTA" prefHeight="450.0" prefWidth="200.0" promptText="How to preview: Save Rec -&gt; Compile -&gt; Done | Editing Rec? Press Compile" wrapText="true" />
-                        <VBox prefHeight="83.0" prefWidth="495.0">
+                        <VBox prefHeight="109.0" prefWidth="495.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#saveEditedRecToFile" prefHeight="25.0" prefWidth="96.0" text="Save to File">
+                              <Button fx:id="saveToTextFileButton" mnemonicParsing="false" onAction="#saveEditedRecToFile" prefHeight="25.0" prefWidth="96.0" text="Save to File">
                                  <VBox.margin>
                                     <Insets left="200.0" top="10.0" />
                                  </VBox.margin>
                               </Button>
-                              <Label fx:id="saveMessage" prefHeight="17.0" prefWidth="241.0" text="Recommendation has been saved to text file" textFill="#346aff">
+                              <Label fx:id="saveMessage" prefHeight="52.0" prefWidth="241.0" text="Recommendation has been saved to text file" textAlignment="CENTER" textFill="#346aff" wrapText="true">
                                  <VBox.margin>
                                     <Insets left="130.0" top="10.0" />
                                  </VBox.margin>

@@ -299,9 +299,9 @@ public class recGUIController implements Initializable {
 				compiledTA.appendText(pcString);
 			}
 	
-			compiledTA.appendText("\n\nFurthermore, I noticced from the term project, " + pronoun
-					+ ", developed leadership, time managment, and problem-solving skills." + " " + pronoun
-					+ " worked effectively with the team members and delegated tasks approriately. "
+			compiledTA.appendText("\n\nFurthermore, I noticed from the term project, " + pronoun
+					+ ", developed leadership, time management, and problem-solving skills." + " " + pronoun
+					+ " worked effectively with the team members and delegated tasks appropriately. "
 					+ "They were able to deliver a successful project in a timely fashion.\n\n");
 			compiledTA.appendText("I believe that " + rec.getFirstname() + " " + rec.getLastname()
 					+ " has the capacity to excel at higher education program and this is my pleasure to highly recommend him.\n\n");
@@ -377,9 +377,9 @@ public class recGUIController implements Initializable {
 				stringBuilder.append(pcString);
 			}
 	
-			stringBuilder.append("\n\nFurthermore, I noticced from the term project, " + pronoun
-					+ ", developed leadership, time managment, and problem-solving skills." + " " + pronoun
-					+ " worked effectively with the team members and delegated tasks approriately. "
+			stringBuilder.append("\n\nFurthermore, I noticed from the term project, " + pronoun
+					+ ", developed leadership, time management, and problem-solving skills." + " " + pronoun
+					+ " worked effectively with the team members and delegated tasks appropriately. "
 					+ "They were able to deliver a successful project in a timely fashion.\n\n");
 			stringBuilder.append("I believe that " + rec.getFirstname() + " " + rec.getLastname()
 					+ " has the capacity to excel at higher education program and this is my pleasure to highly recommend him.\n\n");
@@ -401,7 +401,7 @@ public class recGUIController implements Initializable {
 			}
 			
 			recommendationModel.insertRecommendationDataToDB(rec,stringBuilder);
-			System.out.println("finished writing to text area.");
+			System.out.println("Success: Finished writing to text area.");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -410,16 +410,19 @@ public class recGUIController implements Initializable {
 	@FXML 
 	Button saveEditedRecButton;
 	
-
+	@FXML
+	Button compileButton3;
 	
 	@FXML
-	Label newOrOldBtn;
+	Label newOrOldLabel;
 
 	Recommendation recom;
 	public void loadRec() {
 		if(!(SearchForRecommendationController.getStuRecLastNameToEdit().isEmpty())) { // if the rec is an existing rec
-			newOrOldBtn.setText("Editing Existing Recommendaiton");
+			newOrOldLabel.setText("Editing Existing Recommendaiton");
 			try {
+				compileButton.setVisible(false);
+				compileButton.setVisible(false);
 				recom = recommendationModel.loadRecommendationDataFromDB(SearchForRecommendationController.getStuRecLastNameToEdit());
 				SearchForRecommendationController.studentRecommendationToEdit = "";
 				fnTextField.setText(recom.getFirstname());
@@ -442,12 +445,18 @@ public class recGUIController implements Initializable {
 			
 		} else { // if the rec is new
 			rec = new Recommendation();
-			newOrOldBtn.setText("New Recommendation");
+			newOrOldLabel.setText("New Recommendation");
+			compileButton.setVisible(true);
+			compileButton2.setVisible(true);
+			saveToTextFileButton.setVisible(false);
+			saveMessage.setVisible(false);
 		}
 	}
 
 	@FXML
 	Label saveMessage;
+	@FXML
+	Button saveToTextFileButton;
 	
 	public void saveEditedRecToFile() {
 	    String firstName = recom.getFirstname();
@@ -479,6 +488,7 @@ public class recGUIController implements Initializable {
 	        System.out.println(e);
 	    }
 	    saveMessage.setVisible(true);
+	    saveMessage.setText("Recommendation has been saved to " + fileName);
 	}
 	
 	/**

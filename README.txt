@@ -12,5 +12,5 @@ If you wish to test starting at initial login detection:
 	5. also delete any password column data in the current_password table
 
 If you enter the wrong password, the console will print out the correct password
-from the database, but this is for testing purposes. It is a huge security risk
-in a final product.
+from the database, but this is for testing purposes. Printing the correct password
+is a huge security risk in a final product.

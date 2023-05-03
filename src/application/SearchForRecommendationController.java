@@ -1,22 +1,18 @@
 package application;
 
+import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.RecommendationModel;
 
 public class SearchForRecommendationController {
 	private Stage stage;
@@ -47,39 +43,45 @@ public class SearchForRecommendationController {
 	@FXML
 	TextArea displayRecTA;
 	
-	static String studentRecommendationToEdit;
+	static String studentRecommendationToEdit = "";
+	RecommendationModel recModel = new RecommendationModel();
+	Recommendation rec  =  new Recommendation();
 	
 	public void searchRec(ActionEvent event) throws IOException {
 		try {
 			displayRecTA.clear();
 			recName = searchTF.getText();
-			setStudentRecommendationToEdit(searchTF.getText());
-			int stuPos = user.findStuPos(recName);
-			if(stuPos > -1) {
-				displayRecTA.appendText("Currently working on: " + user.getCompletedRecs().get(stuPos).getFirstname() + "_"
-						+ user.getCompletedRecs().get(stuPos).getLastname() + "_Recommendation\n");
-				user.setEditRecName(recName); // store for editing
+			setStudentRecommendationToEdit(searchTF.getText()); //last name is now usuable by RecommendationModel to make a query to database
+			if(recModel.recommendationExists(recName)) {
+				rec = recModel.loadRecommendationDataFromDB(recName);
+				displayRecTA.appendText("Currently working on: " + rec.getFirstname() + "_"
+						+ rec.getLastname() + "_Recommendation\n");
 			} else {
-				displayRecTA.appendText("That recommendation does not exist.");
+				
 			}
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
 
-	// get name, search for position in arraylist, delete from arraylist
 	public void deleteRec(ActionEvent event) throws IOException {
-		try {
-			recName = searchTF.getText();
-			int stuPos = user.findStuPos(recName);
-			//System.out.println("Student Found? " + stuPos);
-			user.getCompletedRecs().remove(stuPos);
-			displayRecTA.clear();
-			displayRecTA.setText("Recommendation was successfully removed.");
-			//System.out.println("Num of recs in list is/are: " + user.getCompletedRecs().size());
-		} catch (Exception e) {
-			System.out.println(e);
-		}
+	    try {
+	        String recFileName = rec.getFirstname() + "_" + rec.getLastname() + "_" + "Recommendation.txt";
+	        recName = searchTF.getText();
+	        recModel.deleteRecommendationFromDB(recName);
+	        File fileToDelete = new File(recFileName);
+	        if (fileToDelete.delete()) {
+	            displayRecTA.clear();
+	            displayRecTA.setText("Recommendation data in database and textfile " + recFileName + " were successfully removed.");
+	            System.out.println("Recommendation data in database and textfile " + recFileName + " were successfully removed.");
+	        } else {
+	            displayRecTA.clear();
+	            displayRecTA.setText("Error: Could not delete file " + recFileName);
+	            System.out.println("Error: Could not delete file " + recFileName);
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Error: Could not delete recommendation from database");
+	    }
 	}
 
 	public static String getStuRecLastNameToEdit() {
@@ -87,7 +89,7 @@ public class SearchForRecommendationController {
 	}
 
 	public void setStudentRecommendationToEdit(String studentRecommendationToEdit) {
-		this.studentRecommendationToEdit = studentRecommendationToEdit;
+		SearchForRecommendationController.studentRecommendationToEdit = studentRecommendationToEdit;
 	}
 	
 }

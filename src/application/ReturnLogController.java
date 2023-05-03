@@ -33,6 +33,14 @@ public class ReturnLogController implements Initializable{
 		stage.show();
 	}
 	
+	public void switchToSceneResetPW(ActionEvent event) throws IOException {
+		root = (BorderPane) FXMLLoader.load(getClass().getResource("resetPW.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
 	/**
 	 * POPULATE DROPDOWNS WITH FILE/DATABASE INFO
 	 */

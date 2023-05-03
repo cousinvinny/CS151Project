@@ -20,6 +20,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.RecommendationModel;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
@@ -230,6 +231,7 @@ public class recGUIController implements Initializable {
 		try {
 			StringBuilder stringBuilder = new StringBuilder();
 			String pronoun;
+			String fixDate;
 			if (rec.getGender().equals("Male")) {
 				pronoun = "He";
 			} else {
@@ -237,7 +239,7 @@ public class recGUIController implements Initializable {
 			}
 	
 			compiledTA.appendText("For: " + rec.getFirstname() + " " + rec.getLastname() + "\n\n");
-			String fixDate = String.format("%150s", "Date: " + rec.getCurrentDate());
+			fixDate = String.format("%150s", "Date: " + rec.getCurrentDate());
 			compiledTA.appendText(fixDate);
 			compiledTA.appendText("\n\nTo: Graduate Admissions Committee\n\n");
 			compiledTA.appendText("I am writing this letter to recommend my former student " + rec.getFirstname() + " "
@@ -312,8 +314,10 @@ public class recGUIController implements Initializable {
 			compiledTA.appendText(user.getEmail() + "\n");
 			compiledTA.appendText(user.getPhoneNumber());
 	
-			////////////////////////////////////////
+			/////////////////////////////////////////////////////////////////
+			
 			stringBuilder.append("For: " + rec.getFirstname() + " " + rec.getLastname() + "\n\n");
+			fixDate = "Date: " + rec.getCurrentDate();
 			stringBuilder.append(fixDate);
 			stringBuilder.append("\n\nTo: Graduate Admissions Committee\n\n");
 			stringBuilder.append("I am writing this letter to recommend my former student " + rec.getFirstname() + " "
@@ -403,26 +407,32 @@ public class recGUIController implements Initializable {
 		}
 	}
 	
+	@FXML 
+	Button saveEditedRecButton;
+	
+
+	
 	@FXML
 	Label newOrOldBtn;
 
-	
+	Recommendation recom;
 	public void loadRec() {
 		if(!(SearchForRecommendationController.getStuRecLastNameToEdit().isEmpty())) { // if the rec is an existing rec
-			int stuPosition = user.findStuPos(user.getEditRecName());
 			newOrOldBtn.setText("Editing Existing Recommendaiton");
-			//rec = user.getCompletedRecs().get(stuPosition);
-			Recommendation recom;
 			try {
 				recom = recommendationModel.loadRecommendationDataFromDB(SearchForRecommendationController.getStuRecLastNameToEdit());
-				System.out.println(SearchForRecommendationController.getStuRecLastNameToEdit());
 				SearchForRecommendationController.studentRecommendationToEdit = "";
 				fnTextField.setText(recom.getFirstname());
 				lnTextField.setText(recom.getLastname());
 				genCB.setValue(recom.getGender());
 				tsTextField.setText(recom.getTargetSchool());
 				tpCB.setValue(recom.getTargetProgram());
-				//datePick.setValue();
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				LocalDate localDate = LocalDate.parse(recom.getCurrentDate(), formatter);
+				DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+				String newDateString = localDate.format(newFormatter);
+				LocalDate date = LocalDate.parse(newDateString, newFormatter);
+				datePick.setValue(date);
 				semTakeCB.setValue(recom.getFirstSemesterTaken());
 				semYearTextField.setText(recom.getFirstYearTaken());
 				compiledTA.setText(recom.getRecommendationLetterText());
@@ -436,25 +446,59 @@ public class recGUIController implements Initializable {
 		}
 	}
 
+	@FXML
+	Label saveMessage;
+	
+	public void saveEditedRecToFile() {
+	    String firstName = recom.getFirstname();
+	    String lastName = recom.getLastname();
+	    String editedRecText = compiledTA.getText();
+	    int fileCount = 0;
+	    boolean fileExists = true;
+	    String fileName = firstName + "_" + lastName + "_Recommendation.txt";
+	    
+	    // Check if file already exists
+	    File file = new File(fileName);
+	    if (file.exists()) {
+	        while (fileExists) {
+	            fileCount++;
+	            fileName = firstName + "_" + lastName + "_Recommendation(" + fileCount + ").txt";
+	            file = new File(fileName);
+	            if (!file.exists()) {
+	                fileExists = false;
+	            }
+	        }
+	    }
+	    
+	    try {
+	        FileWriter writer = new FileWriter(file);
+	        System.out.println("Success: Wrote to text file");
+	        writer.write(editedRecText);
+	        writer.close();
+	    } catch (IOException e) {
+	        System.out.println(e);
+	    }
+	    saveMessage.setVisible(true);
+	}
+	
 	/**
 	 * Used to initialize the drop down menus with items
 	 */
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		loadRec();
 		
+		loadRec();
 		genCB.getItems().addAll(genders);
 		tpCB.getItems().addAll(programs);
 		semTakeCB.getItems().addAll(semestersTaught);
 		otherCoursesLV.getItems().addAll(courses);
 		pcLV.getItems().addAll(personalChar);
 		acLV.getItems().addAll(academicChar);
-
 		otherCoursesLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		pcLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		acLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		saveMessage.setVisible(false);
 	}
 
 	@FXML

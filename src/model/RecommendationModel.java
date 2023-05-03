@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import application.Recommendation;
 import application.SqliteConnection;
 import application.User;
@@ -48,6 +47,31 @@ public class RecommendationModel {
 		}
 	}
 
+	public boolean recommendationExists(String lastNameInput) throws SQLException{
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		String query = "SELECT * FROM recommendation_data WHERE lastname = ?";
+		try {
+		    preparedStatement = connection.prepareStatement(query);
+		    preparedStatement.setString(1, lastNameInput);
+		    resultSet = preparedStatement.executeQuery();
+		    if (resultSet.next()) {
+		    	System.out.println("Sucess: Recommendation with last name '" + lastNameInput + "' found in database!");
+		        return true;
+		    }
+		    else {
+		    	System.out.println("Error: No recommendation with that last name exists!");
+		        return false;
+		    }
+		} catch (Exception e) {
+			System.out.println("Exception! No recommendation with that last name exists!");
+		    return false;
+		} finally {
+		    preparedStatement.close();
+		    resultSet.close();
+		}
+	}
+	
 	public Recommendation loadRecommendationDataFromDB(String lastNameInput) throws SQLException {
 	    Recommendation recommendation = new Recommendation();
 	    String firstname, lastname, gender, targetSchool, targetProgram, currentDate, firstSemester, firstYear, recommendationLetterText;
@@ -76,6 +100,7 @@ public class RecommendationModel {
 	            recommendation.setGender(gender);
 	            recommendation.setTargetSchool(targetSchool);
 	            recommendation.setTargetProgram(targetProgram);
+	            recommendation.setCurrentDate(currentDate);
 	            recommendation.setFirstSemesterTaken(firstSemester);
 	            recommendation.setFirstYearTaken(firstYear);
 	            recommendation.setRecommendationLetterText(recommendationLetterText);
@@ -87,6 +112,19 @@ public class RecommendationModel {
 	    } finally {
 	        preparedStatement.close();
 	        resultSet.close();
+	    }
+	}
+	
+	public void deleteRecommendationFromDB(String lastNameInput) throws SQLException {
+		String query = "DELETE FROM recommendation_data WHERE lastname = ?";
+		PreparedStatement preparedStatement = null;
+		try {
+			preparedStatement = connection.prepareStatement(query);
+	        preparedStatement.setString(1, lastNameInput);
+	        preparedStatement.executeUpdate();
+	        preparedStatement.close();
+	    } catch (SQLException e) {
+	        System.out.println("Error: Could not delete recommendation from database!");
 	    }
 	}
 }

@@ -15,7 +15,7 @@
 
 <BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.recGUIController">
    <center>
-      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" onDragDetected="#saveEditedRecToFile" BorderPane.alignment="CENTER">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="576.0">
                <children>
@@ -167,12 +167,24 @@
                               <Insets top="23.0" />
                            </padding></Label>
                         <TextArea fx:id="compiledTA" prefHeight="450.0" prefWidth="200.0" promptText="How to preview: Save Rec -&gt; Compile -&gt; Done | Editing Rec? Press Compile" wrapText="true" />
-                        <Label text="saveMessage" textFill="#0095ff">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
+                        <VBox prefHeight="83.0" prefWidth="495.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#saveEditedRecToFile" prefHeight="25.0" prefWidth="96.0" text="Save to File">
+                                 <VBox.margin>
+                                    <Insets left="200.0" top="10.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Label fx:id="saveMessage" prefHeight="17.0" prefWidth="241.0" text="Recommendation has been saved to text file" textFill="#346aff">
+                                 <VBox.margin>
+                                    <Insets left="130.0" top="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
                      </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                   </VBox>
                </children>
             </HBox>

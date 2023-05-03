@@ -27,7 +27,7 @@ public class InitialLoginModel {
 		    resultSet = preparedStatement.executeQuery();
 		    if (resultSet.next()) {
 		        // At least one row exists with initial_login_flag set to true
-		    	System.out.println("This is the initial login!");
+		    	System.out.println("This is your initial login!");
 		        return true;
 		    }
 		    else {
@@ -46,28 +46,36 @@ public class InitialLoginModel {
 	public boolean isFirstTimeLogin(String pass, String flag) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		String query = "select * from default_password where password = ?";
+		String hint ="";
+		String query = "select password from default_password where password = ?";
 		String insert = "INSERT INTO current_password (password) VALUES (?)";
-		String updateInitialLoginFlag = "UPDATE default_password SET password = ?, initial_login_flag = ?";
+		String updateInitialLoginFlag = "UPDATE default_password SET password = ?, initial_login_flag = ? ";
 		try {
 			preparedStatement = connection.prepareStatement(insert);
 			preparedStatement.setString(1, pass);
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
-			
-			preparedStatement = connection.prepareStatement(updateInitialLoginFlag);
-			preparedStatement.setString(1, pass);
-			preparedStatement.setString(2, flag);
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
-			
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, pass);
 			resultSet = preparedStatement.executeQuery();
 			if(resultSet.next()) {
+				preparedStatement.close();
+				preparedStatement = connection.prepareStatement(updateInitialLoginFlag);
+				preparedStatement.setString(1, pass);
+				preparedStatement.setString(2, flag);
+				preparedStatement.executeUpdate();
+				preparedStatement.close();
 				return true;
 			}
 			else {
+				preparedStatement.close();
+	        	resultSet.close();
+	        	query = "SELECT password FROM default_password";
+	        	preparedStatement = connection.prepareStatement(query);
+		        resultSet = preparedStatement.executeQuery();
+				System.out.println("Login Failed");
+	            hint = "Hint: Default password is '" + resultSet.getString("password") + "' (without the quotes)";
+	            System.out.println(hint);
 				return false;
 			}
 		} catch (Exception e) {

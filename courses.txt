@@ -1,7 +1,0 @@
-CS 151: Object-Oriented Design
-CS 166: Information Security
-CS 154: Theory of Computation
-CS 160: Software Engineering
-CS 256: Cryptography
-CS 146: DSA
-CS 152: Programming Languages and Paradigm

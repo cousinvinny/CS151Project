@@ -30,26 +30,6 @@ public class InitialLogController implements Initializable{
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-	/**
-	 * POPULATE DROPDOWNS WITH FILE/DATABASE INFO
-	 */
-
-	/*
-	public void populateInitialDataFromDB() throws SQLException{
-		userDataModel.populateUser();
-		userDataModel.populateSemesters();
-		userDataModel.populateCourses();
-		userDataModel.populatePrograms();
-		userDataModel.populatePersonalCharacteristics();
-		userDataModel.populateAcademicCharacteristics();
-	}*/
-	
-	/**
-	 * END POPULATE DROPDOWNS WITH FILE/DATABASE INFO
-	 */
-	
-	
 	/**
 	 * FIRST TIME LOGING IN
 	 */
@@ -61,8 +41,6 @@ public class InitialLogController implements Initializable{
 	Label loginStatus;
 	public String firstLoginPW;
 	InitialLoginModel initialLoginModel = new InitialLoginModel();
-	//UserDataModel userDataModel = new UserDataModel();
-	
 	
 	public void firstTimeLogin(ActionEvent event) throws IOException {
 		String flag = "FALSE";
@@ -70,7 +48,6 @@ public class InitialLogController implements Initializable{
 		try {
 			if(initialLoginModel.isFirstTimeLogin(firstLoginPW,flag)) {
 				System.out.println("Login Success");
-				//populateInitialDataFromDB();
 				switchToSceneresetPW(event);
 			}
 			else {

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,6 +65,7 @@ public class ReturnLogController implements Initializable{
 		logBackInPW = logBackInPF.getText();
 		try {
 			if(returnLogModel.isLogin(logBackInPW)) {
+				System.out.println("Return Login Successful");
 				populateDataFromDB();
 				switchToSceneRecGUI(event);
 			}

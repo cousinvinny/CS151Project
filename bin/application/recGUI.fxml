@@ -162,8 +162,16 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="576.0">
                      <children>
-                        <Label text="Recommendation Preview" />
+                        <Label text="Recommendation Preview">
+                           <padding>
+                              <Insets top="23.0" />
+                           </padding></Label>
                         <TextArea fx:id="compiledTA" prefHeight="450.0" prefWidth="200.0" promptText="How to preview: Save Rec -&gt; Compile -&gt; Done | Editing Rec? Press Compile" wrapText="true" />
+                        <Label text="saveMessage" textFill="#0095ff">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </VBox>
                </children>

@@ -21,17 +21,18 @@ public class ConfirmOldPWModel{
 	public boolean isLogin(String pass) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
+		String hint;
 		String query = "select * from current_password where password = ?";
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, pass);
 			resultSet = preparedStatement.executeQuery();
-			String hint = "Hint: Old Password is '" + resultSet.getString("password")+"' (without the quotes)";
-			System.out.println(hint);
 			if(resultSet.next()) {
 				return true;
 			}
 			else {
+				hint = "Hint: Old Password is '" + resultSet.getString("password")+"' (without the quotes)";;
+				System.out.println(hint);
 				return false;
 			}
 		} catch (Exception e) {

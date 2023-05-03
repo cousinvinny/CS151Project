@@ -28,7 +28,6 @@ public class ReturnLogModel {
 	        preparedStatement.setString(1, pass);
 	        resultSet = preparedStatement.executeQuery();
 	        if (resultSet.next()) {
-				System.out.println("Login Success");
 	            return true;
 	        } else {
 	        	preparedStatement.close();

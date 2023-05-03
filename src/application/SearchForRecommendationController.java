@@ -1,10 +1,8 @@
-package controller;
+package application;
 
 import java.io.File;
 import java.io.IOException;
 
-import application.Recommendation;
-import application.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

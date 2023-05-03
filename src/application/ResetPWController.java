@@ -1,4 +1,4 @@
-package controller;
+package application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
-import application.User;
 
 public class ResetPWController implements Initializable{
 	private Stage stage;

@@ -27,8 +27,8 @@ public class ReturnLogController implements Initializable{
 	private Parent root;
 	
 	public void switchToSceneRecGUI(ActionEvent event) throws IOException {
-		root = (BorderPane)FXMLLoader.load(getClass().getResource("mainPage.fxml"));
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		root = (BorderPane) FXMLLoader.load(getClass().getResource("mainPage.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();

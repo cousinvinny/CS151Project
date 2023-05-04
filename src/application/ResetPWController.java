@@ -13,7 +13,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.ResetPWModel;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;

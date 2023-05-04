@@ -15,7 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.RecommendationModel;
 
-public class SearchForRecommendationController {
+public class SearchForRecController {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
@@ -44,7 +44,7 @@ public class SearchForRecommendationController {
 	@FXML
 	TextArea displayRecTA;
 	
-	static String studentRecommendationToEdit = "";
+	public static String stuRecToEdit = "";
 	RecommendationModel recModel = new RecommendationModel();
 	Recommendation rec  =  new Recommendation();
 	
@@ -86,11 +86,11 @@ public class SearchForRecommendationController {
 	}
 
 	public static String getStuRecLastNameToEdit() {
-		return studentRecommendationToEdit;
+		return stuRecToEdit;
 	}
 
 	public void setStudentRecommendationToEdit(String studentRecommendationToEdit) {
-		SearchForRecommendationController.studentRecommendationToEdit = studentRecommendationToEdit;
+		SearchForRecController.stuRecToEdit = studentRecommendationToEdit;
 	}
 	
 }

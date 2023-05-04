@@ -418,13 +418,13 @@ public class recGUIController implements Initializable {
 
 	Recommendation recom;
 	public void loadRec() {
-		if(!(SearchForRecommendationController.getStuRecLastNameToEdit().isEmpty())) { // if the rec is an existing rec
+		if(!(SearchForRecController.getStuRecLastNameToEdit().isEmpty())) { // if the rec is an existing rec
 			newOrOldLabel.setText("Editing Existing Recommendaiton");
 			try {
 				compileButton.setVisible(false);
 				compileButton2.setVisible(false);
-				recom = recommendationModel.loadRecommendationDataFromDB(SearchForRecommendationController.getStuRecLastNameToEdit());
-				SearchForRecommendationController.studentRecommendationToEdit = "";
+				recom = recommendationModel.loadRecommendationDataFromDB(SearchForRecController.getStuRecLastNameToEdit());
+				SearchForRecController.stuRecToEdit = "";
 				fnTextField.setText(recom.getFirstname());
 				lnTextField.setText(recom.getLastname());
 				genCB.setValue(recom.getGender());

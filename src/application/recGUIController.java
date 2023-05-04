@@ -78,10 +78,12 @@ public class recGUIController implements Initializable {
 	ListView<String> otherCoursesLV, pcLV, acLV;
 	@FXML
 	TextArea otherGradesTA;
-
+	@FXML
+	Label saveErrorMessage;
+	
 	RecommendationModel recommendationModel = new RecommendationModel();
 	
-	public void compileRec(ActionEvent event) { // rename to save data
+	public void saveRec(ActionEvent event) { // rename to save data
 		try {
 			if(user.getEditRecName().isEmpty()) { // if the rec is new
 				firstname = fnTextField.getText();
@@ -217,9 +219,11 @@ public class recGUIController implements Initializable {
 				System.out.println("Old rec. Just updating values. Not adding to List.");
 			}
 
-			
+			saveErrorMessage.setVisible(false);
 		} catch (Exception e) {
-			System.out.println(e);
+			saveErrorMessage.setVisible(true);
+			saveErrorMessage.setText("Missing required information!");
+			System.out.println("Missing required information! " + e);
 		}
 	}
 
@@ -399,11 +403,13 @@ public class recGUIController implements Initializable {
 			} catch (IOException e) {
 			    System.out.println(e);
 			}
-			
+			saveErrorMessage.setVisible(false);
 			recommendationModel.insertRecommendationDataToDB(rec,stringBuilder);
 			System.out.println("Success: Finished writing to text area.");
 		} catch (Exception e) {
-			System.out.println(e);
+			saveErrorMessage.setVisible(true);
+			saveErrorMessage.setText("Missing required information!");
+			System.out.println("Missing required information! " + e);
 		}
 	}
 	
@@ -509,6 +515,7 @@ public class recGUIController implements Initializable {
 		pcLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		acLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		saveMessage.setVisible(false);
+		saveErrorMessage.setVisible(false);
 	}
 
 	@FXML

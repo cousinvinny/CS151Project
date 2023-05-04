@@ -54,6 +54,9 @@
                                  </children>
                               </HBox>
                            </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="192.0">
                            <children>
@@ -74,6 +77,9 @@
                                  </VBox.margin>
                               </TextField>
                            </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                         </VBox>
                         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="192.0">
                            <children>
@@ -143,7 +149,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="compileButton" mnemonicParsing="false" onAction="#compileRec" text="Save">
+                        <Button fx:id="compileButton" mnemonicParsing="false" onAction="#saveRec" text="Save">
                            <HBox.margin>
                               <Insets right="75.0" />
                            </HBox.margin>
@@ -155,7 +161,15 @@
                         </Button>
                         <Button fx:id="exitRecBTN" mnemonicParsing="false" onAction="#switchToSceneMainPage" text="Exit" />
                      </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                   </HBox>
+                  <Label fx:id="saveErrorMessage" prefHeight="17.0" prefWidth="161.0" text="Missing Required Information" textAlignment="CENTER" textFill="#ff0b0b">
+                     <VBox.margin>
+                        <Insets right="250.0" />
+                     </VBox.margin>
+                  </Label>
                </children>
             </VBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="495.0">

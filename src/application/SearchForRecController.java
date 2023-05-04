@@ -55,10 +55,10 @@ public class SearchForRecController {
 			setStudentRecommendationToEdit(searchTF.getText()); //last name is now usuable by RecommendationModel to make a query to database
 			if(recModel.recommendationExists(recName)) {
 				rec = recModel.loadRecommendationDataFromDB(recName);
-				displayRecTA.appendText("Currently working on: " + rec.getFirstname() + "_"
-						+ rec.getLastname() + "_Recommendation\n");
+				displayRecTA.appendText("Recommendation: " + rec.getFirstname() + "_"
+						+ rec.getLastname() + "_Recommendation was found!\n");
 			} else {
-				
+				displayRecTA.appendText("No recommendation with last name '" + recName + "' was found.");
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -77,8 +77,8 @@ public class SearchForRecController {
 	            System.out.println("Success: Recommendation data in database and textfile " + recFileName + " were successfully removed.");
 	        } else {
 	            displayRecTA.clear();
-	            displayRecTA.setText("Error: Could not delete file " + recFileName);
-	            System.out.println("Error: Could not delete file " + recFileName);
+	            displayRecTA.setText("Error: Could not delete file, please search for a recommendation again.");
+	            System.out.println("Error: Could not delete file, please search for a recommendation again.");
 	        }
 	    } catch (Exception e) {
 	        System.out.println("Error: Could not delete recommendation from database");

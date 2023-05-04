@@ -31,9 +31,15 @@ public class ConfirmOldPWModel{
 				return true;
 			}
 			else {
-				hint = "Hint: Old Password was '" + resultSet.getString("password")+"' (without the quotes)";;
-				System.out.println(hint);
-				return false;
+				preparedStatement.close();
+	        	resultSet.close();
+	        	query = "SELECT password FROM current_password";
+	        	preparedStatement = connection.prepareStatement(query);
+		        resultSet = preparedStatement.executeQuery();
+				System.out.println("Login Failed");
+	            hint = "Hint: Current Password is '" + resultSet.getString("password") + "' (without the quotes)";
+	            System.out.println(hint);
+	            return false;
 			}
 		} catch (Exception e) {
 			return false;

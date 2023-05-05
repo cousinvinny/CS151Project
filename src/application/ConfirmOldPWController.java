@@ -41,7 +41,6 @@ public class ConfirmOldPWController implements Initializable {
 	@FXML
 	Label errorMessage;
 	private String oldPassword;
-	User user = User.getUser();
 	ConfirmOldPWModel confirmOldPWModel = new ConfirmOldPWModel();
 	public void confirmPW(ActionEvent event) throws IOException {
 		try {

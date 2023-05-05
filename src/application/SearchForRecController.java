@@ -35,8 +35,6 @@ public class SearchForRecController {
 		stage.setScene(scene);
 		stage.show();
 	}
-
-	User user = User.getUser();
 	private String recName;
 
 	@FXML

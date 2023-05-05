@@ -65,7 +65,6 @@ public class ReturnLogController implements Initializable{
 	@FXML PasswordField logBackInPF;
 	@FXML Button logBackInBTN;
 	@FXML Label returnLogPasswordStatus;
-	User user = User.getUser();
 	private String logBackInPW;
 	ReturnLogModel returnLogModel = new ReturnLogModel();
 	UserDataModel userDataModel = new UserDataModel();

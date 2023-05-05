@@ -39,8 +39,6 @@ public class ResetPWController implements Initializable{
 	@FXML Label resetPasswordStatus;
 	private String newPassword, confNewPassword;
 	
-	User user = User.getUser();
-	
 	public ResetPWModel resetPWModel = new ResetPWModel();
 	
 	public void confirmPW(ActionEvent event) throws IOException {

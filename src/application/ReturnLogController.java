@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +42,7 @@ public class ReturnLogController implements Initializable{
 	}
 	
 	/**
-	 * POPULATE DROPDOWNS WITH FILE/DATABASE INFO
+	 * POPULATE DROPDOWNS WITH DATABASE INFO
 	 */
 
 	public void populateDataFromDB() throws SQLException{
@@ -56,11 +55,12 @@ public class ReturnLogController implements Initializable{
 	}
 	
 	/**
-	 * END POPULATE DROPDOWNS WITH FILE/DATABASE INFO
+	 * END POPULATE DROPDOWNS WITH DATABASE INFO
 	 */
 	
 	/**
 	 * LOG BACK IN
+	 * Checks if password entered matches the password in the database
 	 */
 	@FXML PasswordField logBackInPF;
 	@FXML Button logBackInBTN;
@@ -82,7 +82,6 @@ public class ReturnLogController implements Initializable{
 				returnLogPasswordStatus.setText("Incorrect password entered!");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			returnLogPasswordStatus.setText("Incorrect password entered!");
 			e.printStackTrace();
 		}
@@ -90,7 +89,6 @@ public class ReturnLogController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		returnLogPasswordStatus.setVisible(false);
 	}
 }

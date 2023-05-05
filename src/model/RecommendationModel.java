@@ -20,6 +20,9 @@ public class RecommendationModel {
 		}
 	}
 
+	/*
+	 * After the user hits the "Compile" button in recommendation page, the recommendation data is saved to database
+	 */
 	public boolean insertRecommendationDataToDB(Recommendation recommendation, StringBuilder sb) {
 		String insert = "INSERT INTO recommendation_data (firstname, lastname, gender, target_school,"
 				+ " target_program, current_date, first_semester, first_year, courses_taken, course_grades,"
@@ -47,6 +50,9 @@ public class RecommendationModel {
 		}
 	}
 
+	/*
+	 * Checks if the recommendation data exists when user searches with the student's last name
+	 */
 	public boolean recommendationExists(String lastNameInput) throws SQLException{
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -72,10 +78,12 @@ public class RecommendationModel {
 		}
 	}
 	
+	/*
+	 * When user clicks "Edit" button after searching for recommendation, the text fields and dropdowns are populated from the database
+	 */
 	public Recommendation loadRecommendationDataFromDB(String lastNameInput) throws SQLException {
 	    Recommendation recommendation = new Recommendation();
 	    String firstname, lastname, gender, targetSchool, targetProgram, currentDate, firstSemester, firstYear, recommendationLetterText;
-	    //coursesTaken,courseGrades, personal_characteristics, academicCharacteristics, ;
 	    PreparedStatement preparedStatement = null;
 	    ResultSet resultSet = null;
 	    String query = "SELECT firstname, lastname, gender, target_school, target_program, current_date, first_semester,"
@@ -116,6 +124,9 @@ public class RecommendationModel {
 	    }
 	}
 	
+	/*
+	 * If user clicks "Delete" button, the recommendation data is removed from database
+	 */
 	public void deleteRecommendationFromDB(String lastNameInput) throws SQLException {
 		String query = "DELETE FROM recommendation_data WHERE lastname = ?";
 		PreparedStatement preparedStatement = null;

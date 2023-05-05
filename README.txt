@@ -1,5 +1,3 @@
-Project was compiled with java version 1.8
-
 Make sure the JRE System Library has build path to to the "sqlite-jdbc-3.41.2.1.jar" 
 driver included in the project folder if the project does not already have the 
 build path to the driver already.

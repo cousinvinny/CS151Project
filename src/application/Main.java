@@ -14,7 +14,7 @@ public class Main extends Application {
 		InitialLoginModel model = new InitialLoginModel();
 		try {
 			BorderPane root;
-			if(model.chechDBForInitialLogin()==true) {			
+			if(model.chechDBForInitialLogin()==true) {//Flag column in database to signal initial login			
 				root = (BorderPane) FXMLLoader.load(getClass().getResource("initialLog.fxml"));
 			}
 			else

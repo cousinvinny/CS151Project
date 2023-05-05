@@ -18,6 +18,9 @@ public class InitialLoginModel {
 		}
 	}
 
+	/*
+	 * Makes a query in database to check if this is the User's first time logging in
+	 */
 	public boolean chechDBForInitialLogin() throws SQLException{
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -43,6 +46,9 @@ public class InitialLoginModel {
 		}
 	}
 	
+	/*
+	 * Checks if user entered the default password 
+	 */
 	public boolean isFirstTimeLogin(String pass, String flag) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;

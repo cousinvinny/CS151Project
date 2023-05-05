@@ -1,6 +1,9 @@
 package application;
 import java.sql.*;
 
+/*
+ * Database connection class
+ */
 public class SqliteConnection {
 	public static Connection Connector() {
 		try {

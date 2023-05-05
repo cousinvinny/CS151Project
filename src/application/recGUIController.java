@@ -83,7 +83,7 @@ public class recGUIController implements Initializable {
 	
 	RecommendationModel recommendationModel = new RecommendationModel();
 	
-	public void saveRec(ActionEvent event) { // rename to save data
+	public void saveRec(ActionEvent event) {
 		try {
 			if(user.getEditRecName().isEmpty()) { // if the rec is new
 				firstname = fnTextField.getText();
@@ -229,9 +229,8 @@ public class recGUIController implements Initializable {
 
 	@FXML
 	TextArea compiledTA;
-
+	//Prints recommendation to textarea in application page and creates a text file
 	public void printRec(ActionEvent event) throws IOException {
-		
 		try {
 			StringBuilder stringBuilder = new StringBuilder();
 			String pronoun;
@@ -318,8 +317,9 @@ public class recGUIController implements Initializable {
 			compiledTA.appendText(user.getEmail() + "\n");
 			compiledTA.appendText(user.getPhoneNumber());
 	
-			/////////////////////////////////////////////////////////////////
-			
+			/*
+			 * Write to text file section
+			 */
 			stringBuilder.append("For: " + rec.getFirstname() + " " + rec.getLastname() + "\n\n");
 			fixDate = "Date: " + rec.getCurrentDate();
 			stringBuilder.append(fixDate);
@@ -423,6 +423,9 @@ public class recGUIController implements Initializable {
 	Label newOrOldLabel;
 
 	Recommendation recom;
+	/*
+	 * If the user searched for a recommendation and is now in the edit page, fields will with recommendation data
+	 */
 	public void loadRec() {
 		if(!(SearchForRecController.getStuRecLastNameToEdit().isEmpty())) { // if the rec is an existing rec
 			newOrOldLabel.setText("Editing Existing Recommendaiton");
@@ -464,6 +467,9 @@ public class recGUIController implements Initializable {
 	@FXML
 	Button saveToTextFileButton;
 	
+	/*
+	 * If in edit recommendation page, save to file button will create a new text file with edited recommendation 
+	 */
 	public void saveEditedRecToFile() {
 	    String firstName = recom.getFirstname();
 	    String lastName = recom.getLastname();

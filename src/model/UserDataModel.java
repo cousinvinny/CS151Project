@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import application.SqliteConnection;
 import application.User;
 
@@ -20,8 +19,10 @@ public class UserDataModel {
 		}
 	}
 	
+	/*
+	 * Reads in faculty signature information from the database
+	 */
 	public boolean populateUser() throws SQLException {
-
 		String name, title, school, department, email, phoneNum;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -54,6 +55,9 @@ public class UserDataModel {
 		}
 	}
 	
+	/*
+	 * Reads in semesters from database
+	 */
 	public boolean populateSemesters() throws SQLException{
 		String semester;
 		PreparedStatement preparedStatement = null;
@@ -75,6 +79,9 @@ public class UserDataModel {
 		}
 	}
 	
+	/*
+	 * Reads in courses faculty teaches from database
+	 */
 	public boolean populateCourses() throws SQLException{
 		String course;
 		PreparedStatement preparedStatement = null;
@@ -96,6 +103,9 @@ public class UserDataModel {
 		}
 	}
 	
+	/*
+	 * Reads in programs from the database that the student is applying for
+	 */
 	public boolean populatePrograms() throws SQLException{
 		String program;
 		PreparedStatement preparedStatement = null;
@@ -117,6 +127,9 @@ public class UserDataModel {
 		}
 	}
 	
+	/*
+	 * Reads in personal characteristics of student from database
+	 */
 	public boolean populatePersonalCharacteristics() throws SQLException{
 		String personalCharcteristic;
 		PreparedStatement preparedStatement = null;
@@ -138,6 +151,9 @@ public class UserDataModel {
 		}
 	}
 	
+	/*
+	 * Reads in academic characteristics of student from database
+	 */
 	public boolean populateAcademicCharacteristics() throws SQLException{
 		String academicCharcteristic;
 		PreparedStatement preparedStatement = null;
@@ -159,14 +175,4 @@ public class UserDataModel {
 		}
 	}
 	
-	/*
-	public boolean editUserData() throws SQLException{
-		try {
-			
-		} catch(Exception e) {
-			
-		} finally {
-			
-		}
-	}*/
 }

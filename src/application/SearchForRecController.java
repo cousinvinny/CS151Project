@@ -63,6 +63,9 @@ public class SearchForRecController {
 		}
 	}
 
+	/*
+	 * Deletes a recommendation from database and the original text file
+	 */
 	public void deleteRec(ActionEvent event) throws IOException {
 	    try {
 	        String recFileName = rec.getFirstname() + "_" + rec.getLastname() + "_" + "Recommendation.txt";

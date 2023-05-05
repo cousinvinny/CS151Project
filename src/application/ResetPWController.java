@@ -33,6 +33,7 @@ public class ResetPWController implements Initializable{
 	
 	/**
 	 * RESET PW
+	 * Checks if password entered matches the password in the database
 	 */
 	@FXML PasswordField newPWPF, confirmNewPWPF;
 	@FXML Button confirmNewPWBTN;

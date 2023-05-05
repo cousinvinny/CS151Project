@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import application.SqliteConnection;
 
 public class ConfirmOldPWModel{
@@ -18,6 +17,9 @@ public class ConfirmOldPWModel{
 		}
 	}
 
+	/*
+	 * Makes a query to database to check if user inputed password is found
+	 */
 	public boolean isLogin(String pass) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import application.SqliteConnection;
 
 public class ReturnLogModel {
@@ -18,6 +17,9 @@ public class ReturnLogModel {
 		}
 	}
 	
+	/*
+	 * Checks if user entered in the correct password on return login page
+	 */
 	public boolean isLogin(String pass) throws SQLException {
 	    PreparedStatement preparedStatement = null;
 	    ResultSet resultSet = null;

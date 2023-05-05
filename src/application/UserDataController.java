@@ -42,7 +42,6 @@ public class UserDataController {
 		}
 	}
 
-//	private Scanner input;
 	private User user = User.getUser();
 	private String fullname, title, schoolName, departmentName, email, phoneNum, program, semester, personal, academic;
 
@@ -51,6 +50,9 @@ public class UserDataController {
 	@FXML
 	TextArea semTaughtTA, programNameTA, pcTA, acTA;
 
+	/*
+	 * Gets the user inputs from textfields, dropdowns, and multiselects and saves to User object
+	 */
 	public void inputUserData(ActionEvent event) {
 		try {
 			fullname = fNameTextField.getText();

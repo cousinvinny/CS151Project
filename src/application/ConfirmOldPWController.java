@@ -42,6 +42,7 @@ public class ConfirmOldPWController implements Initializable {
 	Label errorMessage;
 	private String oldPassword;
 	ConfirmOldPWModel confirmOldPWModel = new ConfirmOldPWModel();
+	//Checks if entered password matches the password inside the database
 	public void confirmPW(ActionEvent event) throws IOException {
 		try {
 			oldPassword = oldPWPF.getText();

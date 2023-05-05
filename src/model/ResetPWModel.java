@@ -17,6 +17,9 @@ public class ResetPWModel {
 		}
 	}
 	
+	/*
+	 * When user changes their password, will delete the current password and replace with the new password
+	 */
 	public boolean resetPW(String pass) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		String delete = "DELETE FROM current_password";
